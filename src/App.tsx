@@ -949,8 +949,9 @@ export default function App() {
         </section>
 
         {/* Footer */}
-        <footer className={`mt-4 mb-4 text-center text-[10px] font-black uppercase tracking-[0.3em] ${isDarkMode ? 'text-slate-700' : 'text-slate-300'}`}>
-          <p>© {new Date().getFullYear()} Dharmayanggg.</p>
+        <footer className={`mt-8 mb-8 text-center space-y-2 ${isDarkMode ? 'text-slate-700' : 'text-slate-400'}`}>
+          <p className="text-[10px] font-black uppercase tracking-[0.3em]">© {new Date().getFullYear()} Dharmayanggg.</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest opacity-70">This linkbio design by dharmayang</p>
         </footer>
 
       </main>
