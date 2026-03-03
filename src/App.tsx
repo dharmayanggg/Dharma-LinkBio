@@ -159,33 +159,32 @@ export default function App() {
   // Data Products
   const products = [
     { 
-      id: 5, 
-      title: 'Source Code 10 Template Link Bio Modern', 
-      price: 'Rp 159.000',
-      description: 'Dapatkan 10 template link bio siap pakai dengan desain modern, responsif, dan mudah dikustomisasi sesuai brand Anda.'
-    },
-    { 
       id: 4, 
-      title: 'Modifikasi Landing Page Lynk.id/Scalev (NoCode)', 
-      price: 'Rp 199.000',
-      description: 'Jasa kustomisasi tampilan landing page Lynk.id atau Scalev agar terlihat lebih profesional, unik, dan meningkatkan konversi penjualan.'
+      title: 'Modifikasi Landing Page Lynk.id/Scalev', 
+      price: 'Rp 349.000',
+      originalPrice: 'Rp 650.000',
+      label: 'Garansi Beda!',
+      description: 'Kustomisasi tampilan menggunakan metode VibeCoding. Lynk.id/Scalev hanya digunakan sebagai payment gateway agar transaksi aman & otomatis.'
     },
     { 
       id: 2, 
       title: 'Belajar 1on1 UI/UX Design untuk Pemula', 
       price: 'Rp 359.000',
+      originalPrice: 'Rp 500.000',
       description: 'Pelajari fundamental desain antarmuka dan pengalaman pengguna. Dari wireframing hingga prototyping, siap kerja di industri kreatif.'
     },
     { 
       id: 6, 
       title: 'Jasa Pembuatan Tools Web untuk Kreator Produk Digital', 
-      price: 'Rp 399.000',
+      price: 'Rp 499.000',
+      originalPrice: 'Rp 999.000',
       description: 'Solusi pembuatan tools berbasis web untuk mendukung bisnis produk digital Anda. Otomatisasi, efisiensi, dan skalabilitas.'
     },
     { 
       id: 1, 
       title: 'Belajar 1on1 Buat Website & Aplikasi VibeCoding', 
       price: 'Rp 449.000',
+      originalPrice: 'Rp 500.000',
       description: 'Bimbingan privat intensif membuat website dan aplikasi dari nol menggunakan metode VibeCoding yang efisien dan modern. Cocok untuk pemula yang ingin hasil cepat.'
     },
     { 
@@ -527,13 +526,13 @@ export default function App() {
                 <div className="absolute top-0 right-0 p-4 opacity-10">
                   <Target className="w-24 h-24 text-red-500" />
                 </div>
-                <div className="flex flex-col md:flex-row gap-5 items-center md:items-start relative z-10 text-center md:text-left">
-                  <div className="p-4 text-red-500 rounded-2xl shrink-0">
-                    <Briefcase className="w-7 h-7" />
+                <div className="flex flex-col gap-5 items-start relative z-10 text-left">
+                  <div className="p-4 text-red-500 rounded-2xl shrink-0 bg-red-500/10">
+                    <Briefcase className="w-6 h-6 md:w-8 md:h-8" />
                   </div>
                   <div>
-                    <h4 className={`text-lg font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Masih Terjebak Rutinitas?</h4>
-                    <p className="text-sm text-slate-400 leading-relaxed">
+                    <h4 className={`text-lg md:text-xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Masih Terjebak Rutinitas?</h4>
+                    <p className="text-sm md:text-base text-slate-400 leading-relaxed">
                       Capek kerja lembur tapi penghasilan segitu-gitu aja? Bingung mau mulai bisnis tapi nggak punya produk fisik atau ribet urus stok & pengiriman? <span className="font-bold text-red-400">Itu tandanya kamu butuh Aset Digital.</span>
                     </p>
                   </div>
@@ -551,18 +550,21 @@ export default function App() {
                     desc: 'Sekali buat, jual berkali-kali. Margin 100% karena nggak ada biaya produksi ulang. Aset yang terus tumbuh tanpa batas ruang dan waktu!', 
                     icon: <Layers className="w-6 h-6" />,
                     color: 'text-emerald-400',
+                    bgColor: 'bg-emerald-400/10'
                   },
                   { 
                     title: 'Potensi AI (Artificial Intelligence)', 
                     desc: 'Proses pembuatan konten & produk jadi 10x lebih cepat. AI adalah asisten pribadimu untuk skalabilitas bisnis tanpa batas.', 
                     icon: <Cpu className="w-6 h-6" />,
                     color: 'text-blue-400',
+                    bgColor: 'bg-blue-400/10'
                   },
                   { 
                     title: 'Potensi Web & Aplikasi', 
                     desc: 'Website & Landing Page adalah "Salesman" digitalmu yang nggak pernah tidur. Siap closing kapanpun, dimanapun, 24 jam sehari!', 
                     icon: <Globe className="w-6 h-6" />,
                     color: 'text-orange-400',
+                    bgColor: 'bg-orange-400/10'
                   }
                 ].map((item, i) => (
                   <motion.div 
@@ -570,14 +572,14 @@ export default function App() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
-                    className={`p-6 rounded-2xl border flex flex-col items-center text-center gap-5 group hover:shadow-lg transition-all backdrop-blur-md ${isDarkMode ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white border-slate-50 shadow-sm hover:border-cyan-200'}`}
+                    className={`p-6 rounded-2xl border flex flex-col items-start text-left gap-5 group hover:shadow-lg transition-all backdrop-blur-md ${isDarkMode ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white border-slate-50 shadow-sm hover:border-cyan-200'}`}
                   >
-                    <div className={`p-3 rounded-xl shrink-0 transition-transform group-hover:scale-110 ${item.color}`}>
+                    <div className={`p-3 rounded-xl shrink-0 transition-transform group-hover:scale-110 ${item.color} ${item.bgColor}`}>
                       {item.icon}
                     </div>
                     <div>
-                      <h5 className={`font-bold text-base mb-1.5 ${isDarkMode ? 'text-slate-200' : 'text-slate-800'}`}>{item.title}</h5>
-                      <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
+                      <h5 className={`font-bold text-base md:text-lg mb-2 ${isDarkMode ? 'text-slate-200' : 'text-slate-800'}`}>{item.title}</h5>
+                      <p className="text-xs md:text-sm text-slate-400 leading-relaxed">{item.desc}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -716,6 +718,14 @@ export default function App() {
               ];
               const color = colors[i % colors.length];
 
+              // Calculate discount
+              let discount = 0;
+              if (product.originalPrice) {
+                 const p = parseInt(product.price.replace(/[^0-9]/g, ''));
+                 const op = parseInt(product.originalPrice.replace(/[^0-9]/g, ''));
+                 discount = Math.round(((op - p) / op) * 100);
+              }
+
               return (
                 <div key={product.id} className={`group relative flex flex-col p-5 rounded-2xl border transition-all duration-300 hover:shadow-lg backdrop-blur-md overflow-hidden ${
                   isDarkMode 
@@ -727,18 +737,39 @@ export default function App() {
                     className="flex md:flex-col md:items-center md:text-center md:justify-center items-center justify-between w-full text-left"
                   >
                     <div className="flex-1 md:w-full md:flex md:flex-col md:items-center">
-                      <div className="flex md:flex-col items-center gap-3 mb-1.5 md:mb-3">
-                        <CheckCircle2 className={`w-4 h-4 md:w-8 md:h-8 ${color.icon} shrink-0`} />
+                      <div className="flex flex-wrap md:flex-col items-center gap-2 mb-1.5 md:mb-3">
+                        <CheckCircle2 className={`w-4 h-4 md:w-8 md:h-8 ${color.icon} shrink-0 mr-1`} />
                         <h4 className={`font-bold text-sm md:text-lg transition-colors leading-tight ${
                           isDarkMode ? 'text-slate-200 group-hover:text-white' : 'text-slate-800 group-hover:text-cyan-700'
                         }`}>{product.title}</h4>
+                        
                         {product.status === 'On Hold' && (
-                          <span className="text-[8px] px-1.5 py-0.5 rounded font-black uppercase tracking-tighter bg-red-500/20 text-red-500 border border-red-500/30">
+                          <span className="text-[8px] px-1.5 py-0.5 rounded font-black uppercase tracking-tighter bg-red-500/20 text-red-500 border border-red-500/30 whitespace-nowrap">
                             On Hold
                           </span>
                         )}
+                        {/* @ts-ignore */}
+                        {product.label && (
+                          <span className="text-[8px] px-1.5 py-0.5 rounded font-black uppercase tracking-tighter bg-emerald-500/20 text-emerald-500 border border-emerald-500/30 whitespace-nowrap">
+                            {/* @ts-ignore */}
+                            {product.label}
+                          </span>
+                        )}
                       </div>
-                      <p className={`text-sm md:text-base font-black ml-7 md:ml-0 ${isDarkMode ? color.icon : 'text-emerald-600'}`}>{product.price}</p>
+                      
+                      <div className="flex items-center gap-2 md:justify-center">
+                         <p className={`text-sm md:text-base font-black ${isDarkMode ? color.icon : 'text-emerald-600'}`}>{product.price}</p>
+                         {/* @ts-ignore */}
+                         {product.originalPrice && (
+                           <div className="flex items-center gap-1.5">
+                             {/* @ts-ignore */}
+                             <span className="text-[10px] line-through text-slate-500">{product.originalPrice}</span>
+                             <span className="text-[9px] font-bold text-red-500 bg-red-500/10 px-1.5 py-0.5 rounded-md border border-red-500/20">
+                               Save {discount}%
+                             </span>
+                           </div>
+                         )}
+                      </div>
                     </div>
                     
                     <div className={`p-2 rounded-lg transition-all transform duration-300 ${isSelected ? 'rotate-180' : ''} ${isDarkMode ? 'text-slate-400' : 'text-slate-400'} md:mt-4`}>
