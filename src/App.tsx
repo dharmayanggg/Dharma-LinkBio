@@ -481,13 +481,13 @@ export default function App() {
         <section className="w-full space-y-4">
 
           {/* COPYWRITING SECTION */}
-          <div className="mt-2 space-y-10 relative md:grid md:grid-cols-2 md:gap-12 md:space-y-0 md:items-start">
+          <div className="mt-2 space-y-10 relative max-w-4xl mx-auto">
             
-            {/* Left Column: Hook & Pain Point */}
+            {/* Hook & Pain Point */}
             <div className="space-y-10">
               {/* Hook */}
-              <div className="text-center md:text-left space-y-6 relative z-10">
-                <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest backdrop-blur-md ${isDarkMode ? 'bg-white/5 text-blue-400 border border-blue-500/20' : 'bg-cyan-50 text-cyan-600 border border-cyan-100'}`}>
+              <div className="text-center space-y-6 relative z-10">
+                <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest backdrop-blur-md mx-auto ${isDarkMode ? 'bg-white/5 text-blue-400 border border-blue-500/20' : 'bg-cyan-50 text-cyan-600 border border-cyan-100'}`}>
                   Bangun Aset Digital
                 </div>
                 
@@ -495,7 +495,7 @@ export default function App() {
                   <motion.div 
                     animate={{ y: [0, -10, 0] }} 
                     transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-                    className="absolute left-4 -top-2 md:left-20 md:-top-4 text-blue-400 opacity-80"
+                    className="absolute left-4 -top-2 md:left-20 md:-top-4 text-blue-400 opacity-80 hidden md:block"
                   >
                      <Globe className="w-5 h-5 md:w-6 md:h-6" />
                   </motion.div>
@@ -507,13 +507,13 @@ export default function App() {
                   <motion.div 
                     animate={{ y: [0, -10, 0] }} 
                     transition={{ repeat: Infinity, duration: 3, ease: "easeInOut", delay: 1.5 }}
-                    className="absolute right-4 -top-2 md:right-20 md:-top-4 text-emerald-400 opacity-80"
+                    className="absolute right-4 -top-2 md:right-20 md:-top-4 text-emerald-400 opacity-80 hidden md:block"
                   >
                      <Cpu className="w-5 h-5 md:w-6 md:h-6" />
                   </motion.div>
                 </div>
 
-                <p className={`text-sm md:text-base max-w-sm md:max-w-none mx-auto md:mx-0 leading-relaxed ${isDarkMode ? 'text-slate-300' : 'text-slate-500'}`}>
+                <p className={`text-sm md:text-base max-w-2xl mx-auto leading-relaxed ${isDarkMode ? 'text-slate-300' : 'text-slate-500'}`}>
                   Lupakan produk digital lama seperti PDF ebook dan lainnya. Saatnya bikin produk multifungsi dengan <span className="text-blue-400 font-bold">NoCode Development</span>. Saatnya bangun sistem yang bekerja otomatis untukmu.
                 </p>
               </div>
@@ -522,13 +522,13 @@ export default function App() {
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                className={`p-8 rounded-3xl border relative overflow-hidden backdrop-blur-md ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-slate-100 shadow-xl shadow-slate-200/50'}`}
+                className={`p-8 rounded-3xl border relative overflow-hidden backdrop-blur-md max-w-3xl mx-auto ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-slate-100 shadow-xl shadow-slate-200/50'}`}
               >
                 <div className="absolute top-0 right-0 p-4 opacity-10">
                   <Target className="w-24 h-24 text-red-500" />
                 </div>
-                <div className="flex gap-5 items-start relative z-10">
-                  <div className="p-4 text-red-500 rounded-2xl">
+                <div className="flex flex-col md:flex-row gap-5 items-center md:items-start relative z-10 text-center md:text-left">
+                  <div className="p-4 text-red-500 rounded-2xl shrink-0">
                     <Briefcase className="w-7 h-7" />
                   </div>
                   <div>
@@ -541,10 +541,10 @@ export default function App() {
               </motion.div>
             </div>
 
-            {/* Right Column: Potensi & Calculator Link */}
+            {/* Potensi & Calculator Link */}
             <div className="space-y-10">
               {/* Potensi Sections */}
-              <div className="grid gap-5 md:grid-cols-1">
+              <div className="grid gap-5 md:grid-cols-3">
                 {[
                   { 
                     title: 'Potensi Produk Digital', 
@@ -570,7 +570,7 @@ export default function App() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
-                    className={`p-6 rounded-2xl border flex gap-5 group hover:shadow-lg transition-all backdrop-blur-md ${isDarkMode ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white border-slate-50 shadow-sm hover:border-cyan-200'}`}
+                    className={`p-6 rounded-2xl border flex flex-col items-center text-center gap-5 group hover:shadow-lg transition-all backdrop-blur-md ${isDarkMode ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white border-slate-50 shadow-sm hover:border-cyan-200'}`}
                   >
                     <div className={`p-3 rounded-xl shrink-0 transition-transform group-hover:scale-110 ${item.color}`}>
                       {item.icon}
@@ -724,12 +724,12 @@ export default function App() {
                 }`}>
                   <button 
                     onClick={() => setSelectedProduct(isSelected ? null : product.id)}
-                    className="flex items-center justify-between w-full text-left"
+                    className="flex md:flex-col md:items-center md:text-center md:justify-center items-center justify-between w-full text-left"
                   >
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-1.5">
-                        <CheckCircle2 className={`w-4 h-4 ${color.icon} shrink-0`} />
-                        <h4 className={`font-bold text-sm transition-colors leading-tight ${
+                    <div className="flex-1 md:w-full md:flex md:flex-col md:items-center">
+                      <div className="flex md:flex-col items-center gap-3 mb-1.5 md:mb-3">
+                        <CheckCircle2 className={`w-4 h-4 md:w-8 md:h-8 ${color.icon} shrink-0`} />
+                        <h4 className={`font-bold text-sm md:text-lg transition-colors leading-tight ${
                           isDarkMode ? 'text-slate-200 group-hover:text-white' : 'text-slate-800 group-hover:text-cyan-700'
                         }`}>{product.title}</h4>
                         {product.status === 'On Hold' && (
@@ -738,10 +738,10 @@ export default function App() {
                           </span>
                         )}
                       </div>
-                      <p className={`text-sm font-black ml-7 ${isDarkMode ? color.icon : 'text-emerald-600'}`}>{product.price}</p>
+                      <p className={`text-sm md:text-base font-black ml-7 md:ml-0 ${isDarkMode ? color.icon : 'text-emerald-600'}`}>{product.price}</p>
                     </div>
                     
-                    <div className={`p-2 rounded-lg transition-all transform duration-300 ${isSelected ? 'rotate-180' : ''} ${isDarkMode ? 'text-slate-400' : 'text-slate-400'}`}>
+                    <div className={`p-2 rounded-lg transition-all transform duration-300 ${isSelected ? 'rotate-180' : ''} ${isDarkMode ? 'text-slate-400' : 'text-slate-400'} md:mt-4`}>
                       <ChevronDown className="w-4 h-4" />
                     </div>
                   </button>
@@ -752,7 +752,7 @@ export default function App() {
                         initial={{ opacity: 0, height: 0, marginTop: 0 }}
                         animate={{ opacity: 1, height: 'auto', marginTop: 16 }}
                         exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                        className="overflow-hidden ml-7"
+                        className="overflow-hidden ml-7 md:ml-0 md:text-center"
                       >
                         <p className={`text-xs leading-relaxed mb-4 ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
                           {product.description}
@@ -819,21 +819,21 @@ export default function App() {
                  }`}>
                    <button 
                      onClick={() => setSelectedService(isSelected ? null : service.id)}
-                     className="flex items-center justify-between w-full text-left"
+                     className="flex md:flex-col md:items-center md:text-center md:justify-center items-center justify-between w-full text-left"
                    >
-                     <div className="flex-1">
-                       <div className="flex items-center gap-3 mb-1.5">
+                     <div className="flex-1 md:w-full md:flex md:flex-col md:items-center">
+                       <div className="flex md:flex-col items-center gap-3 mb-1.5 md:mb-3">
                          <div className={`${color.icon} shrink-0`}>
-                           {React.cloneElement(service.icon as React.ReactElement, { className: "w-4 h-4" })}
+                           {React.cloneElement(service.icon as React.ReactElement, { className: "w-4 h-4 md:w-8 md:h-8" })}
                          </div>
-                         <h4 className={`font-bold text-sm transition-colors leading-tight ${
+                         <h4 className={`font-bold text-sm md:text-lg transition-colors leading-tight ${
                            isDarkMode ? 'text-slate-200 group-hover:text-white' : 'text-slate-800 group-hover:text-cyan-700'
                          }`}>{service.title}</h4>
                        </div>
-                       <p className={`text-sm font-black ml-7 ${isDarkMode ? color.icon : 'text-emerald-600'}`}>{service.price}</p>
+                       <p className={`text-sm md:text-base font-black ml-7 md:ml-0 ${isDarkMode ? color.icon : 'text-emerald-600'}`}>{service.price}</p>
                      </div>
                      
-                     <div className={`p-2 rounded-lg transition-all transform duration-300 ${isSelected ? 'rotate-180' : ''} ${isDarkMode ? 'text-slate-400' : 'text-slate-400'}`}>
+                     <div className={`p-2 rounded-lg transition-all transform duration-300 ${isSelected ? 'rotate-180' : ''} ${isDarkMode ? 'text-slate-400' : 'text-slate-400'} md:mt-4`}>
                        <ChevronDown className="w-4 h-4" />
                      </div>
                    </button>
@@ -844,7 +844,7 @@ export default function App() {
                          initial={{ opacity: 0, height: 0, marginTop: 0 }}
                          animate={{ opacity: 1, height: 'auto', marginTop: 16 }}
                          exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                         className="overflow-hidden ml-7"
+                         className="overflow-hidden ml-7 md:ml-0 md:text-center"
                        >
                          <p className={`text-xs leading-relaxed mb-4 ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
                            {service.description}
