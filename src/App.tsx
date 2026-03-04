@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'motion/react';
-import { ChevronRight, MessageCircle, Code, Palette, Smartphone, BarChart3, ExternalLink, Briefcase, Layers, Sun, Moon, Calculator, ArrowRight, TrendingUp, Cpu, Zap, Target, Rocket, CheckCircle2, Globe, Database, ChevronDown, ArrowUp, FileText } from 'lucide-react';
+import { ChevronRight, MessageCircle, Code, Palette, Smartphone, BarChart3, ExternalLink, Briefcase, Layers, Sun, Moon, Calculator, ArrowRight, TrendingUp, Cpu, Zap, Target, Rocket, CheckCircle2, Globe, Database, ChevronDown, ArrowUp, FileText, ShoppingBag, Video, Package } from 'lucide-react';
 
 // Counter Component for Stats
 const Counter = ({ value, suffix = "" }: { value: number; suffix?: string }) => {
@@ -159,6 +159,20 @@ export default function App() {
   // Data Products
   const products = [
     { 
+      id: 2, 
+      title: 'Modul Belajar UI/UX Design untuk Pemula', 
+      price: 'Rp 67.000',
+      originalPrice: 'Rp 399.000',
+      description: 'Pelajari fundamental desain antarmuka dan pengalaman pengguna. Dari wireframing hingga prototyping, siap kerja di industri kreatif.'
+    },
+    { 
+      id: 1, 
+      title: 'Modul Belajar Buat Website & Aplikasi VibeCoding', 
+      price: 'Rp 67.000',
+      originalPrice: 'Rp 399.000',
+      description: 'Bimbingan privat intensif membuat website dan aplikasi dari nol menggunakan metode VibeCoding yang efisien dan modern. Cocok untuk pemula yang ingin hasil cepat.'
+    },
+    { 
       id: 4, 
       title: 'Modifikasi Landing Page Lynk.id/Scalev', 
       price: 'Rp 349.000',
@@ -167,25 +181,11 @@ export default function App() {
       description: 'Kustomisasi tampilan menggunakan metode VibeCoding. Lynk.id/Scalev hanya digunakan sebagai payment gateway agar transaksi aman & otomatis.'
     },
     { 
-      id: 2, 
-      title: 'Belajar 1on1 UI/UX Design untuk Pemula', 
-      price: 'Rp 359.000',
-      originalPrice: 'Rp 500.000',
-      description: 'Pelajari fundamental desain antarmuka dan pengalaman pengguna. Dari wireframing hingga prototyping, siap kerja di industri kreatif.'
-    },
-    { 
       id: 6, 
       title: 'Jasa Pembuatan Tools Web untuk Kreator Produk Digital', 
       price: 'Rp 499.000',
       originalPrice: 'Rp 999.000',
       description: 'Solusi pembuatan tools berbasis web untuk mendukung bisnis produk digital Anda. Otomatisasi, efisiensi, dan skalabilitas.'
-    },
-    { 
-      id: 1, 
-      title: 'Belajar 1on1 Buat Website & Aplikasi VibeCoding', 
-      price: 'Rp 449.000',
-      originalPrice: 'Rp 500.000',
-      description: 'Bimbingan privat intensif membuat website dan aplikasi dari nol menggunakan metode VibeCoding yang efisien dan modern. Cocok untuk pemula yang ingin hasil cepat.'
     },
     { 
       id: 3, 
@@ -334,7 +334,7 @@ export default function App() {
               Digital Kreator
             </div>
             <div 
-               className={`text-sm border px-4 py-1.5 rounded-full font-medium flex items-center gap-2 transition-all shadow-sm ${
+               className={`text-xs border px-4 py-1.5 rounded-full font-bold flex items-center gap-2 transition-all shadow-sm ${
                  isDarkMode 
                    ? 'bg-[#021b1a] border-emerald-900/50 text-emerald-400' 
                    : 'bg-white border-slate-200 text-slate-600'
@@ -371,6 +371,49 @@ export default function App() {
                 }`}>{stat.label}</div>
               </div>
             ))}
+          </div>
+
+          {/* New Buttons Section: Racun Shopee, Tiktok, Product Digital */}
+          <div className="grid grid-cols-3 gap-4 md:gap-8 w-full max-w-4xl mx-auto mt-6">
+            <a 
+              href="https://s.shopee.co.id/9fFsvOHfhm" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className={`p-3 rounded-xl font-bold text-[10px] md:text-sm flex flex-col items-center justify-center gap-2 transition-all duration-300 border backdrop-blur-md group hover:-translate-y-1 active:scale-95 text-center h-full w-full ${
+                isDarkMode 
+                  ? 'bg-white/5 border-white/10 text-slate-300 hover:border-orange-500 hover:text-orange-400 hover:shadow-[0_0_20px_rgba(249,115,22,0.4)]' 
+                  : 'bg-white/60 border-slate-200 text-slate-600 hover:border-orange-500 hover:text-orange-600 hover:shadow-[0_0_20px_rgba(249,115,22,0.3)]'
+              }`}
+            >
+              <ShoppingBag className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover:scale-110" />
+              <span>Racun Shopee</span>
+            </a>
+            
+            <a 
+              href="https://www.tiktok.com/@dharmayangg?_r=1&_t=ZS-94OXxWbRjF3" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className={`p-3 rounded-xl font-bold text-[10px] md:text-sm flex flex-col items-center justify-center gap-2 transition-all duration-300 border backdrop-blur-md group hover:-translate-y-1 active:scale-95 text-center h-full w-full ${
+                isDarkMode 
+                  ? 'bg-white/5 border-white/10 text-slate-300 hover:border-pink-500 hover:text-pink-400 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)]' 
+                  : 'bg-white/60 border-slate-200 text-slate-600 hover:border-black hover:text-black hover:shadow-[0_0_20px_rgba(0,0,0,0.2)]'
+              }`}
+            >
+              <Video className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover:scale-110" />
+              <span>Racun Tiktok</span>
+            </a>
+
+            <button 
+              onClick={() => document.getElementById('digital-products')?.scrollIntoView({ behavior: 'smooth' })}
+              className={`p-3 rounded-xl font-bold text-[10px] md:text-sm flex flex-col items-center justify-center gap-2 transition-all duration-300 border backdrop-blur-md group hover:-translate-y-1 active:scale-95 text-center h-full w-full ${
+                isDarkMode 
+                  ? 'bg-white/5 border-white/10 text-slate-300 hover:border-emerald-500 hover:text-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.4)]' 
+                  : 'bg-white/60 border-slate-200 text-slate-600 hover:border-emerald-500 hover:text-emerald-600 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)]'
+              }`}
+            >
+              <Package className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover:scale-110" />
+              <span>Product Digital</span>
+            </button>
           </div>
         </header>
 
@@ -737,27 +780,31 @@ export default function App() {
                     className="flex md:flex-col md:items-center md:text-center md:justify-center items-center justify-between w-full text-left"
                   >
                     <div className="flex-1 md:w-full md:flex md:flex-col md:items-center">
-                      <div className="flex flex-wrap md:flex-col items-center gap-2 mb-1.5 md:mb-3">
-                        <CheckCircle2 className={`w-4 h-4 md:w-8 md:h-8 ${color.icon} shrink-0 mr-1`} />
-                        <h4 className={`font-bold text-sm md:text-lg transition-colors leading-tight ${
-                          isDarkMode ? 'text-slate-200 group-hover:text-white' : 'text-slate-800 group-hover:text-cyan-700'
-                        }`}>{product.title}</h4>
-                        
-                        {product.status === 'On Hold' && (
-                          <span className="text-[8px] px-1.5 py-0.5 rounded font-black uppercase tracking-tighter bg-red-500/20 text-red-500 border border-red-500/30 whitespace-nowrap">
-                            On Hold
-                          </span>
-                        )}
-                        {/* @ts-ignore */}
-                        {product.label && (
-                          <span className="text-[8px] px-1.5 py-0.5 rounded font-black uppercase tracking-tighter bg-emerald-500/20 text-emerald-500 border border-emerald-500/30 whitespace-nowrap">
+                      <div className="flex flex-row md:flex-col items-start md:items-center gap-3 mb-2 md:mb-3 w-full">
+                        <CheckCircle2 className={`w-5 h-5 md:w-8 md:h-8 ${color.icon} shrink-0 mt-0.5 md:mt-0`} />
+                        <div className="flex flex-col md:items-center gap-1 min-w-0 flex-1">
+                          <h4 className={`font-bold text-sm md:text-lg transition-colors leading-tight ${
+                            isDarkMode ? 'text-slate-200 group-hover:text-white' : 'text-slate-800 group-hover:text-cyan-700'
+                          }`}>{product.title}</h4>
+                          
+                          <div className="flex flex-wrap gap-1.5 md:justify-center">
+                            {product.status === 'On Hold' && (
+                              <span className="text-[8px] px-1.5 py-0.5 rounded font-black uppercase tracking-tighter bg-red-500/20 text-red-500 border border-red-500/30 whitespace-nowrap">
+                                On Hold
+                              </span>
+                            )}
                             {/* @ts-ignore */}
-                            {product.label}
-                          </span>
-                        )}
+                            {product.label && (
+                              <span className="text-[8px] px-1.5 py-0.5 rounded font-black uppercase tracking-tighter bg-emerald-500/20 text-emerald-500 border border-emerald-500/30 whitespace-nowrap">
+                                {/* @ts-ignore */}
+                                {product.label}
+                              </span>
+                            )}
+                          </div>
+                        </div>
                       </div>
                       
-                      <div className="flex items-center gap-2 md:justify-center">
+                      <div className="flex items-center gap-2 md:justify-center pl-8 md:pl-0">
                          <p className={`text-sm md:text-base font-black ${isDarkMode ? color.icon : 'text-emerald-600'}`}>{product.price}</p>
                          {/* @ts-ignore */}
                          {product.originalPrice && (
@@ -826,7 +873,7 @@ export default function App() {
         <section className="w-full space-y-4">
           <h3 className={`text-xs font-bold mb-2 tracking-widest uppercase flex items-center gap-3 ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>
             <span className={`w-6 h-[2px] ${isDarkMode ? 'bg-slate-800' : 'bg-slate-200'}`}></span>
-            Services & Pricing
+            Services for Company
             <span className={`w-6 h-[2px] ${isDarkMode ? 'bg-slate-800' : 'bg-slate-200'}`}></span>
           </h3>
           
