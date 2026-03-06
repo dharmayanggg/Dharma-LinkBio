@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'motion/react';
 import { ChevronRight, MessageCircle, Code, Palette, Smartphone, BarChart3, ExternalLink, Briefcase, Layers, Sun, Moon, Calculator, ArrowRight, TrendingUp, Cpu, Zap, Target, Rocket, CheckCircle2, Globe, Database, ChevronDown, ArrowUp, FileText, ShoppingBag, Video, Package } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 
 // Counter Component for Stats
 const Counter = ({ value, suffix = "" }: { value: number; suffix?: string }) => {
@@ -1077,6 +1078,7 @@ export default function App() {
         )}
       </AnimatePresence>
 
+      <Analytics />
     </div>
   );
 }
