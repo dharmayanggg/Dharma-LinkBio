@@ -158,7 +158,7 @@ function Home() {
 
       {/* SaaS Style Header */}
       <nav className={`sticky top-0 z-50 w-full border-b backdrop-blur-md transition-all ${isDarkMode ? 'bg-[#010b0a]/80 border-emerald-900/20' : 'bg-white/80 border-slate-200'}`}>
-        <div className="max-w-lg md:max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isDarkMode ? 'bg-emerald-500 text-[#010b0a]' : 'bg-cyan-600 text-white'}`}>
               <Zap className="w-5 h-5" />
@@ -181,7 +181,7 @@ function Home() {
         </div>
       </nav>
 
-      <main className="relative z-10 max-w-lg md:max-w-7xl mx-auto px-6 pt-6 pb-12 flex flex-col items-center gap-10">
+      <main className="relative z-10 max-w-5xl mx-auto px-6 pt-6 pb-12 flex flex-col items-center gap-10">
         
         {/* HERO SECTION (SaaS Style) */}
         <section className="w-full text-center space-y-6 md:py-10">

@@ -180,24 +180,26 @@ const Portfolio: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#010b0a] text-slate-300 font-sans flex flex-col overflow-hidden">
       {/* Top Navigation */}
-      <nav className="h-14 border-b border-emerald-900/20 bg-[#010b0a]/90 backdrop-blur-md flex items-center justify-between px-4 shrink-0 z-50">
-        <Link to="/portfolio" className="p-2 -ml-2 text-slate-400 hover:text-emerald-500 transition-colors">
-          <ArrowLeft className="w-5 h-5" />
-        </Link>
-        
-        <div className="flex flex-col items-center">
-          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500 leading-none mb-1">Previewing</span>
-          <span className="text-xs font-bold text-white truncate max-w-[150px]">{currentProject.title}</span>
-        </div>
+      <nav className="h-14 border-b border-emerald-900/20 bg-[#010b0a]/90 backdrop-blur-md shrink-0 z-50">
+        <div className="max-w-2xl mx-auto px-4 h-full flex items-center justify-between">
+          <Link to="/portfolio" className="p-2 -ml-2 text-slate-400 hover:text-emerald-500 transition-colors">
+            <ArrowLeft className="w-5 h-5" />
+          </Link>
+          
+          <div className="flex flex-col items-center">
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500 leading-none mb-1">Previewing</span>
+            <span className="text-xs font-bold text-white truncate max-w-[150px]">{currentProject.title}</span>
+          </div>
 
-        <a 
-          href={currentProject.url} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="p-2 -mr-2 text-emerald-500 hover:text-emerald-400 transition-colors"
-        >
-          <ExternalLink className="w-5 h-5" />
-        </a>
+          <a 
+            href={currentProject.url} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="p-2 -mr-2 text-emerald-500 hover:text-emerald-400 transition-colors"
+          >
+            <ExternalLink className="w-5 h-5" />
+          </a>
+        </div>
       </nav>
 
       {/* Main Content Container */}

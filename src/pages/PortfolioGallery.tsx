@@ -77,7 +77,7 @@ const PortfolioGallery: React.FC = () => {
     <div className="min-h-screen bg-[#010b0a] text-slate-300 font-sans pb-20">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#010b0a]/80 backdrop-blur-xl border-b border-emerald-900/20">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 text-slate-400 hover:text-emerald-500 transition-colors group">
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
           </Link>
@@ -90,7 +90,7 @@ const PortfolioGallery: React.FC = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="py-20 px-4 max-w-7xl mx-auto text-center">
+      <section className="py-20 px-4 max-w-5xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -111,7 +111,7 @@ const PortfolioGallery: React.FC = () => {
       </section>
 
       {/* Projects Grid */}
-      <section className="px-4 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="px-4 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, index) => (
           <motion.div
             key={project.id}
