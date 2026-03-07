@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'motion/react';
-import { ChevronRight, MessageCircle, Code, Palette, Smartphone, BarChart3, ExternalLink, Briefcase, Layers, Sun, Moon, Calculator, ArrowRight, TrendingUp, Cpu, Zap, Target, Rocket, CheckCircle2, Globe, Database, ChevronDown, ArrowUp, FileText, ShoppingBag, Video, Package } from 'lucide-react';
+import { ChevronRight, MessageCircle, Code, Palette, Smartphone, BarChart3, ExternalLink, Briefcase, Layers, Sun, Moon, Calculator, ArrowRight, TrendingUp, Cpu, Zap, Target, Rocket, CheckCircle2, Globe, Database, ChevronDown, ArrowUp, FileText, ShoppingBag, Video, Package, Laptop, Instagram, AtSign } from 'lucide-react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+
+// Import Pages
+import Portfolio from './pages/Portfolio';
+import PortfolioGallery from './pages/PortfolioGallery';
+import Services from './pages/Services';
+import DigitalProducts from './pages/DigitalProducts';
 
 // Counter Component for Stats
 const Counter = ({ value, suffix = "" }: { value: number; suffix?: string }) => {
@@ -32,18 +39,26 @@ const Counter = ({ value, suffix = "" }: { value: number; suffix?: string }) => 
 };
 
 export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/portfolio" element={<PortfolioGallery />} />
+        <Route path="/portfolio/preview" element={<Portfolio />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/digital-products" element={<DigitalProducts />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+function Home() {
   // State for selected skill details
   const [selectedSkill, setSelectedSkill] = useState<number | null>(null);
-  const [selectedService, setSelectedService] = useState<number | null>(null);
-  const [selectedProduct, setSelectedProduct] = useState<number | null>(null);
   
   // Hardcoded Dark Mode for the requested Emerald/Black theme
   const isDarkMode = true;
 
-  // State for Income Calculator - Initialized as empty strings
-  const [calcPrice, setCalcPrice] = useState<number | ''>('');
-  const [calcSales, setCalcSales] = useState<number | ''>('');
-  const [monthlyIncome, setMonthlyIncome] = useState<number>(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
@@ -58,14 +73,6 @@ export default function App() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  useEffect(() => {
-    if (calcPrice !== '' && calcSales !== '') {
-      setMonthlyIncome(Number(calcPrice) * Number(calcSales) * 30);
-    } else {
-      setMonthlyIncome(0);
-    }
-  }, [calcPrice, calcSales]);
 
   // Disable Right Click & Selection
   useEffect(() => {
@@ -122,78 +129,6 @@ export default function App() {
     { company: 'PT INDODHARMA NUSA RAHAYU', role: 'Community & Talent Manager', period: '2021 - 2025' },
     { company: 'AGENCY LOMBOK & BALI INFLUENCER', role: 'Sosmed Management', period: '2020 - 2025' },
     { company: 'FREELANCER', role: 'Graphic Design', period: '2009 - 2025' },
-  ];
-
-  // Data Services
-  const services = [
-    { 
-      id: 1, 
-      title: 'UI/UX Design', 
-      price: 'Starts from Rp 1.000.000', 
-      icon: <Smartphone className="w-5 h-5" />,
-      description: 'Desain antarmuka yang estetis dan pengalaman pengguna yang intuitif untuk aplikasi web dan mobile Anda.'
-    },
-    { 
-      id: 2, 
-      title: 'Web Development', 
-      price: 'Starts from Rp 1.500.000', 
-      icon: <Code className="w-5 h-5" />,
-      description: 'Pembuatan website responsif, cepat, dan modern menggunakan teknologi terbaru seperti React dan Next.js.'
-    },
-    { 
-      id: 3, 
-      title: 'Apps Development (Full Stack)', 
-      price: 'Starts from Rp 5.000.000', 
-      icon: <Layers className="w-5 h-5" />,
-      description: 'Pengembangan aplikasi mobile dan web end-to-end, dari backend yang kuat hingga frontend yang memukau.'
-    },
-    { 
-      id: 4, 
-      title: 'SaaS Management', 
-      price: 'Starts from Rp 8.500.000', 
-      icon: <Briefcase className="w-5 h-5" />,
-      description: 'Pengelolaan dan optimasi layanan SaaS Anda untuk memastikan performa maksimal dan pertumbuhan bisnis.'
-    },
-  ];
-
-  // Data Products
-  const products = [
-    { 
-      id: 2, 
-      title: 'Modul Belajar UI/UX Design untuk Pemula', 
-      price: 'Rp 67.000',
-      originalPrice: 'Rp 399.000',
-      description: 'Pelajari fundamental desain antarmuka dan pengalaman pengguna. Dari wireframing hingga prototyping, siap kerja di industri kreatif.'
-    },
-    { 
-      id: 1, 
-      title: 'Modul Belajar Buat Website & Aplikasi VibeCoding', 
-      price: 'Rp 67.000',
-      originalPrice: 'Rp 399.000',
-      description: 'Bimbingan privat intensif membuat website dan aplikasi dari nol menggunakan metode VibeCoding yang efisien dan modern. Cocok untuk pemula yang ingin hasil cepat.'
-    },
-    { 
-      id: 4, 
-      title: 'Modifikasi Landing Page Lynk.id/Scalev', 
-      price: 'Rp 349.000',
-      originalPrice: 'Rp 650.000',
-      label: 'Garansi Beda!',
-      description: 'Kustomisasi tampilan menggunakan metode VibeCoding. Lynk.id/Scalev hanya digunakan sebagai payment gateway agar transaksi aman & otomatis.'
-    },
-    { 
-      id: 6, 
-      title: 'Jasa Pembuatan Tools Web untuk Kreator Produk Digital', 
-      price: 'Rp 499.000',
-      originalPrice: 'Rp 999.000',
-      description: 'Solusi pembuatan tools berbasis web untuk mendukung bisnis produk digital Anda. Otomatisasi, efisiensi, dan skalabilitas.'
-    },
-    { 
-      id: 3, 
-      title: 'Belajar Full Stack Development', 
-      price: 'Rp 669.000', 
-      status: 'On Hold',
-      description: 'Kurikulum lengkap menjadi Full Stack Developer handal. Menguasai frontend, backend, dan database untuk membangun aplikasi kompleks.'
-    },
   ];
 
   const waNumber = "6282342344558";
@@ -373,47 +308,60 @@ export default function App() {
             ))}
           </div>
 
-          {/* New Buttons Section: Racun Shopee, Tiktok, Product Digital */}
-          <div className="grid grid-cols-3 gap-4 md:gap-8 w-full max-w-4xl mx-auto mt-6">
-            <a 
-              href="https://s.shopee.co.id/9fFsvOHfhm" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className={`p-3 rounded-xl font-bold text-[10px] md:text-sm flex flex-col items-center justify-center gap-2 transition-all duration-300 border backdrop-blur-md group hover:-translate-y-1 active:scale-95 text-center h-full w-full ${
-                isDarkMode 
-                  ? 'bg-white/5 border-white/10 text-slate-300 hover:border-orange-500 hover:text-orange-400 hover:shadow-[0_0_20px_rgba(249,115,22,0.4)]' 
-                  : 'bg-white/60 border-slate-200 text-slate-600 hover:border-orange-500 hover:text-orange-600 hover:shadow-[0_0_20px_rgba(249,115,22,0.3)]'
-              }`}
-            >
-              <ShoppingBag className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover:scale-110" />
-              <span>Racun Shopee</span>
-            </a>
-            
-            <a 
-              href="https://www.tiktok.com/@dharmayangg?_r=1&_t=ZS-94OXxWbRjF3" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className={`p-3 rounded-xl font-bold text-[10px] md:text-sm flex flex-col items-center justify-center gap-2 transition-all duration-300 border backdrop-blur-md group hover:-translate-y-1 active:scale-95 text-center h-full w-full ${
-                isDarkMode 
-                  ? 'bg-white/5 border-white/10 text-slate-300 hover:border-pink-500 hover:text-pink-400 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)]' 
-                  : 'bg-white/60 border-slate-200 text-slate-600 hover:border-black hover:text-black hover:shadow-[0_0_20px_rgba(0,0,0,0.2)]'
-              }`}
-            >
-              <Video className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover:scale-110" />
-              <span>Racun Tiktok</span>
-            </a>
-
-            <button 
-              onClick={() => document.getElementById('digital-products')?.scrollIntoView({ behavior: 'smooth' })}
+          {/* New Buttons Section: Service, Product Digital */}
+          <div className="grid grid-cols-2 gap-4 md:gap-8 w-full max-w-4xl mx-auto mt-6">
+            <Link 
+              to="/services"
               className={`p-3 rounded-xl font-bold text-[10px] md:text-sm flex flex-col items-center justify-center gap-2 transition-all duration-300 border backdrop-blur-md group hover:-translate-y-1 active:scale-95 text-center h-full w-full ${
                 isDarkMode 
                   ? 'bg-white/5 border-white/10 text-slate-300 hover:border-emerald-500 hover:text-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.4)]' 
                   : 'bg-white/60 border-slate-200 text-slate-600 hover:border-emerald-500 hover:text-emerald-600 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)]'
               }`}
             >
+              <Laptop className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover:scale-110" />
+              <span>Service</span>
+            </Link>
+
+            <Link 
+              to="/digital-products"
+              className={`p-3 rounded-xl font-bold text-[10px] md:text-sm flex flex-col items-center justify-center gap-2 transition-all duration-300 border backdrop-blur-md group hover:-translate-y-1 active:scale-95 text-center h-full w-full ${
+                isDarkMode 
+                  ? 'bg-white/5 border-white/10 text-slate-300 hover:border-purple-500 hover:text-purple-400 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]' 
+                  : 'bg-white/60 border-slate-200 text-slate-600 hover:border-purple-500 hover:text-purple-600 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]'
+              }`}
+            >
               <Package className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover:scale-110" />
               <span>Product Digital</span>
-            </button>
+            </Link>
+          </div>
+
+          <div className="w-full max-w-4xl mx-auto mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+            <Link 
+              to="/portfolio"
+              className={`p-4 rounded-xl font-bold text-sm flex items-center justify-start px-6 gap-3 transition-all duration-300 border backdrop-blur-md group hover:-translate-y-1 active:scale-[0.98] ${
+                isDarkMode 
+                  ? 'bg-emerald-500 border-emerald-500 text-[#010b0a] hover:bg-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)]' 
+                  : 'bg-emerald-600 border-emerald-600 text-white hover:bg-emerald-700 shadow-sm'
+              }`}
+            >
+              <Briefcase className="w-5 h-5 transition-transform group-hover:scale-110" />
+              <span>Web Portofolio</span>
+              <ArrowRight className="w-4 h-4 ml-auto" />
+            </Link>
+            <a 
+              href="https://drive.google.com/file/d/1wQWC5AW_ZGwKkTomy6CgOi1ZWEhf2x9t/view?usp=drivesdk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`p-4 rounded-xl font-bold text-sm flex items-center justify-start px-6 gap-3 transition-all duration-300 border backdrop-blur-md group hover:-translate-y-1 active:scale-[0.98] ${
+                isDarkMode 
+                  ? 'bg-white/5 border-white/10 text-slate-300 hover:border-emerald-500/50 hover:bg-white/10' 
+                  : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50 shadow-sm'
+              }`}
+            >
+              <FileText className="w-5 h-5 transition-transform group-hover:scale-110" />
+              <span>Design Portfolio (Pdf)</span>
+              <ExternalLink className="w-4 h-4 opacity-50 ml-auto" />
+            </a>
           </div>
         </header>
 
@@ -488,7 +436,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* SECTION 3: Experience */}
+        {/* SECTION 5: Experience */}
         <section className="w-full space-y-4">
           <h3 className={`text-xs font-bold mb-2 tracking-widest uppercase flex items-center gap-3 ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>
             <span className={`w-6 h-[2px] ${isDarkMode ? 'bg-slate-800' : 'bg-slate-200'}`}></span>
@@ -519,516 +467,146 @@ export default function App() {
           </div>
         </section>
 
-        {/* SECTION 4: Copywriting & Calculator */}
-        <section className="w-full space-y-4">
-
-          {/* COPYWRITING SECTION */}
-          <div className="mt-2 space-y-10 relative max-w-4xl mx-auto">
-            
-            {/* Hook & Pain Point */}
-            <div className="space-y-10">
-              {/* Hook */}
-              <div className="text-center space-y-6 relative z-10">
-                <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest backdrop-blur-md mx-auto ${isDarkMode ? 'bg-white/5 text-blue-400 border border-blue-500/20' : 'bg-cyan-50 text-cyan-600 border border-cyan-100'}`}>
-                  Bangun Aset Digital
-                </div>
-                
-                <div className="relative inline-block w-full">
-                  <motion.div 
-                    animate={{ y: [0, -10, 0] }} 
-                    transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-                    className="absolute left-4 -top-2 md:left-20 md:-top-4 text-blue-400 opacity-80 hidden md:block"
-                  >
-                     <Globe className="w-5 h-5 md:w-6 md:h-6" />
-                  </motion.div>
-
-                  <h2 className={`text-4xl md:text-5xl font-black leading-tight tracking-tighter ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-                    Bikin Aset Digital yang Menghasilkan <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Cuan 24/7</span>!
-                  </h2>
-
-                  <motion.div 
-                    animate={{ y: [0, -10, 0] }} 
-                    transition={{ repeat: Infinity, duration: 3, ease: "easeInOut", delay: 1.5 }}
-                    className="absolute right-4 -top-2 md:right-20 md:-top-4 text-emerald-400 opacity-80 hidden md:block"
-                  >
-                     <Cpu className="w-5 h-5 md:w-6 md:h-6" />
-                  </motion.div>
-                </div>
-
-                <p className={`text-sm md:text-base max-w-2xl mx-auto leading-relaxed ${isDarkMode ? 'text-slate-300' : 'text-slate-500'}`}>
-                  Lupakan produk digital lama seperti PDF ebook dan lainnya. Saatnya bikin produk multifungsi dengan <span className="text-blue-400 font-bold">NoCode Development</span>. Saatnya bangun sistem yang bekerja otomatis untukmu.
-                </p>
-              </div>
-
-              {/* Pain Point */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                className={`p-8 rounded-3xl border relative overflow-hidden backdrop-blur-md max-w-3xl mx-auto ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-slate-100 shadow-xl shadow-slate-200/50'}`}
-              >
-                <div className="absolute top-0 right-0 p-4 opacity-10">
-                  <Target className="w-24 h-24 text-red-500" />
-                </div>
-                <div className="flex flex-col gap-5 items-start relative z-10 text-left">
-                  <div className="p-4 text-red-500 rounded-2xl shrink-0 bg-red-500/10">
-                    <Briefcase className="w-6 h-6 md:w-8 md:h-8" />
-                  </div>
-                  <div>
-                    <h4 className={`text-lg md:text-xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Masih Terjebak Rutinitas?</h4>
-                    <p className="text-sm md:text-base text-slate-400 leading-relaxed">
-                      Capek kerja lembur tapi penghasilan segitu-gitu aja? Bingung mau mulai bisnis tapi nggak punya produk fisik atau ribet urus stok & pengiriman? <span className="font-bold text-red-400">Itu tandanya kamu butuh Aset Digital.</span>
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Potensi & Calculator Link */}
-            <div className="space-y-10">
-              {/* Potensi Sections */}
-              <div className="grid gap-5 md:grid-cols-3">
-                {[
-                  { 
-                    title: 'Potensi Produk Digital', 
-                    desc: 'Sekali buat, jual berkali-kali. Margin 100% karena nggak ada biaya produksi ulang. Aset yang terus tumbuh tanpa batas ruang dan waktu!', 
-                    icon: <Layers className="w-6 h-6" />,
-                    color: 'text-emerald-400',
-                    bgColor: 'bg-emerald-400/10'
-                  },
-                  { 
-                    title: 'Potensi AI (Artificial Intelligence)', 
-                    desc: 'Proses pembuatan konten & produk jadi 10x lebih cepat. AI adalah asisten pribadimu untuk skalabilitas bisnis tanpa batas.', 
-                    icon: <Cpu className="w-6 h-6" />,
-                    color: 'text-blue-400',
-                    bgColor: 'bg-blue-400/10'
-                  },
-                  { 
-                    title: 'Potensi Web & Aplikasi', 
-                    desc: 'Website & Landing Page adalah "Salesman" digitalmu yang nggak pernah tidur. Siap closing kapanpun, dimanapun, 24 jam sehari!', 
-                    icon: <Globe className="w-6 h-6" />,
-                    color: 'text-orange-400',
-                    bgColor: 'bg-orange-400/10'
-                  }
-                ].map((item, i) => (
-                  <motion.div 
-                    key={i}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.1 }}
-                    className={`p-6 rounded-2xl border flex flex-col items-start text-left gap-5 group hover:shadow-lg transition-all backdrop-blur-md ${isDarkMode ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white border-slate-50 shadow-sm hover:border-cyan-200'}`}
-                  >
-                    <div className={`p-3 rounded-xl shrink-0 transition-transform group-hover:scale-110 ${item.color} ${item.bgColor}`}>
-                      {item.icon}
-                    </div>
-                    <div>
-                      <h5 className={`font-bold text-base md:text-lg mb-2 ${isDarkMode ? 'text-slate-200' : 'text-slate-800'}`}>{item.title}</h5>
-                      <p className="text-xs md:text-sm text-slate-400 leading-relaxed">{item.desc}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* CTA to Calculator */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                className="text-center pt-6"
-              >
-                <p className={`text-sm font-bold mb-6 tracking-wide ${isDarkMode ? 'text-emerald-400' : 'text-slate-600'}`}>
-                  PENASARAN DENGAN POTENSINYA? 🚀
-                </p>
-                <button 
-                  onClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' })}
-                  className={`px-10 py-5 rounded-2xl font-black text-sm uppercase tracking-[0.2em] flex items-center justify-center gap-4 mx-auto transition-all shadow-2xl hover:scale-105 active:scale-95 group ${
-                    isDarkMode 
-                      ? 'bg-emerald-600 text-[#010b0a] hover:bg-emerald-500 shadow-emerald-900/40' 
-                      : 'bg-cyan-500 text-white hover:bg-cyan-600 shadow-cyan-200'
-                  }`}
-                >
-                  Hitung Potensi Cuan
-                  <Calculator className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                </button>
-              </motion.div>
-            </div>
+        {/* SECTION 6: Web Projects Showcase */}
+        <section className="w-full space-y-6">
+          <div className="flex items-center justify-between">
+            <h3 className={`text-xs font-bold tracking-widest uppercase flex items-center gap-3 ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>
+              <span className={`w-6 h-[2px] ${isDarkMode ? 'bg-slate-800' : 'bg-slate-200'}`}></span>
+              Web Projects
+              <span className={`w-6 h-[2px] ${isDarkMode ? 'bg-slate-800' : 'bg-slate-200'}`}></span>
+            </h3>
+            <Link to="/portfolio" className="text-[10px] font-black uppercase tracking-widest text-emerald-500 hover:text-emerald-400 flex items-center gap-1 transition-colors">
+              View All <ChevronRight className="w-3 h-3" />
+            </Link>
           </div>
 
-          {/* Income Calculator */}
-          <div id="calculator" className={`mt-16 md:mt-24 p-8 md:p-12 rounded-3xl border relative overflow-hidden max-w-4xl mx-auto w-full ${
-            isDarkMode 
-              ? 'bg-[#021b1a] border-emerald-900/20 shadow-2xl' 
-              : 'bg-gradient-to-br from-white to-slate-50 border-slate-200 shadow-xl shadow-slate-200/50'
-          }`}>
-            <div className={`absolute top-0 right-0 w-48 h-48 rounded-full blur-[100px] ${isDarkMode ? 'bg-emerald-500/5' : 'bg-emerald-500/10'}`}></div>
-            
-            <div className="relative z-10 md:grid md:grid-cols-2 md:gap-12 md:items-center">
-              <div>
-                <div className="flex items-center gap-3 mb-6">
-                  <div className={`p-2 rounded-xl ${isDarkMode ? 'bg-emerald-500/20 text-emerald-400' : 'bg-emerald-100 text-emerald-600'}`}>
-                    <Calculator className="w-5 h-5" />
-                  </div>
-                  <h4 className={`font-bold text-[10px] uppercase tracking-[0.2em] ${isDarkMode ? 'text-emerald-500' : 'text-emerald-600'}`}>Income Simulator</h4>
-                </div>
-                
-                <h3 className={`text-2xl md:text-3xl font-black mb-3 tracking-tight ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-                  Hitung Potensi Cuanmu 💸
-                </h3>
-                <p className={`text-sm mb-8 leading-relaxed ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Gunakan simulator ini untuk melihat seberapa besar potensi penghasilan pasif dari produk digitalmu setiap bulannya.
-                </p>
-
-                <div className="space-y-6 mb-8 md:mb-0">
-                  <div className="space-y-2.5">
-                    <label className={`text-[10px] font-black uppercase tracking-widest ${isDarkMode ? 'text-emerald-900' : 'text-slate-500'}`}>Harga Produk (Rp)</label>
-                    <input 
-                      type="number" 
-                      placeholder="Contoh: 99000"
-                      value={calcPrice}
-                      onChange={(e) => setCalcPrice(e.target.value === '' ? '' : Number(e.target.value))}
-                      className={`w-full px-4 py-4 rounded-xl text-sm border focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all ${
-                        isDarkMode 
-                          ? 'bg-[#010b0a] border-emerald-900/50 text-white placeholder-emerald-900/50' 
-                          : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
-                      }`}
-                    />
-                  </div>
-                  <div className="space-y-2.5">
-                    <label className={`text-[10px] font-black uppercase tracking-widest ${isDarkMode ? 'text-emerald-900' : 'text-slate-500'}`}>Terjual / Hari</label>
-                    <input 
-                      type="number" 
-                      placeholder="Contoh: 2"
-                      value={calcSales}
-                      onChange={(e) => setCalcSales(e.target.value === '' ? '' : Number(e.target.value))}
-                      className={`w-full px-4 py-4 rounded-xl text-sm border focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all ${
-                        isDarkMode 
-                          ? 'bg-[#010b0a] border-emerald-900/50 text-white placeholder-emerald-900/50' 
-                          : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
-                      }`}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className={`p-8 rounded-2xl border flex flex-col items-center justify-center h-full transition-all ${
-                isDarkMode 
-                  ? 'bg-[#010b0a] border-emerald-900/30 shadow-inner' 
-                  : 'bg-white border-slate-200 shadow-inner'
-              }`}>
-                <span className={`text-[10px] font-black uppercase tracking-[0.2em] mb-2 ${isDarkMode ? 'text-emerald-900' : 'text-slate-500'}`}>Potensi Income Bulanan</span>
-                <span className={`text-4xl md:text-5xl font-black ${isDarkMode ? 'text-emerald-400' : 'text-emerald-600'}`}>
-                  Rp {monthlyIncome.toLocaleString('id-ID')}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Post Calculator Copywriting */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="mt-10 text-center space-y-4"
-          >
-            <p className={`text-sm leading-relaxed font-medium ${isDarkMode ? 'text-emerald-50' : 'text-slate-600'}`}>
-              Sudah tau hasilnya? Seandainya kamu mulai tahun lalu, mungkin kamu sudah memiliki <span className="text-emerald-500 font-bold">income settle</span>. Jangan tunda lagi dan menyesal, coba upskill dirimu di sini.
-            </p>
-            <motion.div 
-              animate={{ y: [0, 10, 0] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-              className="flex justify-center"
-            >
-              <ArrowRight className="w-6 h-6 text-emerald-500 rotate-90" />
-            </motion.div>
-          </motion.div>
-        </section>
-
-        {/* SECTION 5: Digital Products */}
-        <section id="digital-products" className="w-full space-y-4">
-          <h3 className={`text-xs font-bold mb-2 tracking-widest uppercase flex items-center gap-3 ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>
-            <span className={`w-6 h-[2px] ${isDarkMode ? 'bg-slate-800' : 'bg-slate-200'}`}></span>
-            Digital Products
-            <span className={`w-6 h-[2px] ${isDarkMode ? 'bg-slate-800' : 'bg-slate-200'}`}></span>
-          </h3>
-
-          <div className="space-y-3 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {products.map((product, i) => {
-              const isSelected = selectedProduct === product.id;
-              // Variasi warna untuk products
-              const colors = [
-                { border: 'hover:border-purple-500/50', icon: 'text-purple-400', bg: 'bg-purple-500', btn: 'bg-purple-500' },
-                { border: 'hover:border-sky-500/50', icon: 'text-sky-400', bg: 'bg-sky-500', btn: 'bg-sky-500' },
-                { border: 'hover:border-amber-500/50', icon: 'text-amber-400', bg: 'bg-amber-500', btn: 'bg-amber-500' },
-                { border: 'hover:border-emerald-500/50', icon: 'text-emerald-400', bg: 'bg-emerald-500', btn: 'bg-emerald-500' },
-                { border: 'hover:border-pink-500/50', icon: 'text-pink-400', bg: 'bg-pink-500', btn: 'bg-pink-500' },
-              ];
-              const color = colors[i % colors.length];
-
-              // Calculate discount
-              let discount = 0;
-              if (product.originalPrice) {
-                 const p = parseInt(product.price.replace(/[^0-9]/g, ''));
-                 const op = parseInt(product.originalPrice.replace(/[^0-9]/g, ''));
-                 discount = Math.round(((op - p) / op) * 100);
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { 
+                title: 'Retail Memberships', 
+                desc: 'Platform kartu member digital & AI scan produk.',
+                value: '8.5M',
+                icon: <ShoppingBag className="w-5 h-5" />,
+                color: 'from-emerald-500/20 to-teal-500/20'
+              },
+              { 
+                title: 'UKM Penalaran Hub', 
+                desc: 'Platform komunitas riset & forum diskusi AI.',
+                value: '5.0M',
+                icon: <Globe className="w-5 h-5" />,
+                color: 'from-blue-500/20 to-cyan-500/20'
+              },
+              { 
+                title: 'Pegadaian Swasta', 
+                desc: 'Landing page & tools taksiran barang otomatis.',
+                value: '3.5M',
+                icon: <Calculator className="w-5 h-5" />,
+                color: 'from-amber-500/20 to-orange-500/20'
               }
-
-              return (
-                <div key={product.id} className={`group relative flex flex-col p-5 rounded-2xl border transition-all duration-300 hover:shadow-lg backdrop-blur-md overflow-hidden ${
-                  isDarkMode 
-                    ? `bg-white/5 border-white/10 ${color.border}` 
-                    : 'bg-white border-slate-200 hover:border-cyan-500'
-                }`}>
-                  <button 
-                    onClick={() => setSelectedProduct(isSelected ? null : product.id)}
-                    className="flex md:flex-col md:items-center md:text-center md:justify-center items-center justify-between w-full text-left"
-                  >
-                    <div className="flex-1 md:w-full md:flex md:flex-col md:items-center">
-                      <div className="flex flex-row md:flex-col items-start md:items-center gap-3 mb-2 md:mb-3 w-full">
-                        <CheckCircle2 className={`w-5 h-5 md:w-8 md:h-8 ${color.icon} shrink-0 mt-0.5 md:mt-0`} />
-                        <div className="flex flex-col md:items-center gap-1 min-w-0 flex-1">
-                          <h4 className={`font-bold text-sm md:text-lg transition-colors leading-tight ${
-                            isDarkMode ? 'text-slate-200 group-hover:text-white' : 'text-slate-800 group-hover:text-cyan-700'
-                          }`}>{product.title}</h4>
-                          
-                          <div className="flex flex-wrap gap-1.5 md:justify-center">
-                            {product.status === 'On Hold' && (
-                              <span className="text-[8px] px-1.5 py-0.5 rounded font-black uppercase tracking-tighter bg-red-500/20 text-red-500 border border-red-500/30 whitespace-nowrap">
-                                On Hold
-                              </span>
-                            )}
-                            {/* @ts-ignore */}
-                            {product.label && (
-                              <span className="text-[8px] px-1.5 py-0.5 rounded font-black uppercase tracking-tighter bg-emerald-500/20 text-emerald-500 border border-emerald-500/30 whitespace-nowrap">
-                                {/* @ts-ignore */}
-                                {product.label}
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-center gap-2 md:justify-center pl-8 md:pl-0">
-                         <p className={`text-sm md:text-base font-black ${isDarkMode ? color.icon : 'text-emerald-600'}`}>{product.price}</p>
-                         {/* @ts-ignore */}
-                         {product.originalPrice && (
-                           <div className="flex items-center gap-1.5">
-                             {/* @ts-ignore */}
-                             <span className="text-[10px] line-through text-slate-500">{product.originalPrice}</span>
-                             <span className="text-[9px] font-bold text-red-500 bg-red-500/10 px-1.5 py-0.5 rounded-md border border-red-500/20">
-                               Save {discount}%
-                             </span>
-                           </div>
-                         )}
-                      </div>
+            ].map((p, i) => (
+              <Link key={i} to="/portfolio" className={`group p-5 rounded-2xl border border-white/10 bg-gradient-to-br ${p.color} hover:border-emerald-500/30 transition-all relative overflow-hidden`}>
+                <div className="relative z-10 flex justify-between items-start">
+                  <div className="space-y-2">
+                    <div className="p-2 w-fit rounded-lg bg-white/10 text-white mb-2">
+                      {p.icon}
                     </div>
-                    
-                    <div className={`p-2 rounded-lg transition-all transform duration-300 ${isSelected ? 'rotate-180' : ''} ${isDarkMode ? 'text-slate-400' : 'text-slate-400'} md:mt-4`}>
-                      <ChevronDown className="w-4 h-4" />
-                    </div>
-                  </button>
-
-                  <AnimatePresence>
-                    {isSelected && (
-                      <motion.div 
-                        initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                        animate={{ opacity: 1, height: 'auto', marginTop: 16 }}
-                        exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                        className="overflow-hidden ml-7 md:ml-0 md:text-center"
-                      >
-                        <p className={`text-xs leading-relaxed mb-4 ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
-                          {product.description}
-                        </p>
-                        
-                        {product.status !== 'On Hold' ? (
-                          <button 
-                             onClick={() => window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(`Halo Dharma, saya mau order produk digital: ${product.title}.`)}`, '_blank')}
-                             className={`w-full py-2.5 rounded-xl transition-all text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm active:scale-95 ${
-                               isDarkMode 
-                                 ? `${color.btn} text-white hover:bg-white/20` 
-                                 : 'bg-slate-50 text-slate-500 hover:bg-cyan-600 hover:text-white border border-slate-100'
-                             }`}
-                          >
-                             Order Sekarang
-                             <ArrowRight className="w-3 h-3" />
-                          </button>
-                        ) : (
-                          <button 
-                             disabled
-                             className={`w-full py-2.5 rounded-xl transition-all text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 cursor-not-allowed opacity-50 ${
-                               isDarkMode 
-                                 ? 'bg-slate-800 text-slate-500' 
-                                 : 'bg-slate-100 text-slate-400'
-                             }`}
-                          >
-                             Tidak Tersedia
-                          </button>
-                        )}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                    <h4 className="font-black text-white uppercase tracking-tight text-sm">{p.title}</h4>
+                    <p className="text-[10px] text-slate-400 leading-relaxed max-w-[180px]">{p.desc}</p>
+                  </div>
                 </div>
-              );
-            })}
+                <div className="absolute -bottom-2 -right-2 opacity-10 group-hover:scale-110 transition-transform">
+                   {React.cloneElement(p.icon as React.ReactElement, { className: "w-20 h-20" })}
+                </div>
+              </Link>
+            ))}
           </div>
         </section>
 
-        {/* SECTION: Services & Pricing (Moved) */}
-        <section className="w-full space-y-4">
-          <h3 className={`text-xs font-bold mb-2 tracking-widest uppercase flex items-center gap-3 ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>
-            <span className={`w-6 h-[2px] ${isDarkMode ? 'bg-slate-800' : 'bg-slate-200'}`}></span>
-            Services for Company
-            <span className={`w-6 h-[2px] ${isDarkMode ? 'bg-slate-800' : 'bg-slate-200'}`}></span>
-          </h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-             {services.map((service, i) => {
-               const isSelected = selectedService === service.id;
-               // Variasi warna untuk services
-               const colors = [
-                 { border: 'hover:border-orange-500/50', icon: 'text-orange-400', bg: 'bg-orange-500', btn: 'bg-orange-500' },
-                 { border: 'hover:border-blue-500/50', icon: 'text-blue-400', bg: 'bg-blue-500', btn: 'bg-blue-500' },
-                 { border: 'hover:border-pink-500/50', icon: 'text-pink-400', bg: 'bg-pink-500', btn: 'bg-pink-500' },
-                 { border: 'hover:border-teal-500/50', icon: 'text-teal-400', bg: 'bg-teal-500', btn: 'bg-teal-500' },
-               ];
-               const color = colors[i % colors.length];
-
-               return (
-                 <div key={service.id} className={`group relative flex flex-col p-5 rounded-2xl border transition-all duration-300 hover:shadow-lg backdrop-blur-md overflow-hidden ${
-                   isDarkMode 
-                     ? `bg-white/5 border-white/10 ${color.border}` 
-                     : 'bg-white border-slate-200 hover:border-cyan-500'
-                 }`}>
-                   <button 
-                     onClick={() => setSelectedService(isSelected ? null : service.id)}
-                     className="flex md:flex-col md:items-center md:text-center md:justify-center items-center justify-between w-full text-left"
-                   >
-                     <div className="flex-1 md:w-full md:flex md:flex-col md:items-center">
-                       <div className="flex md:flex-col items-center gap-3 mb-1.5 md:mb-3">
-                         <div className={`${color.icon} shrink-0`}>
-                           {React.cloneElement(service.icon as React.ReactElement, { className: "w-4 h-4 md:w-8 md:h-8" })}
-                         </div>
-                         <h4 className={`font-bold text-sm md:text-lg transition-colors leading-tight ${
-                           isDarkMode ? 'text-slate-200 group-hover:text-white' : 'text-slate-800 group-hover:text-cyan-700'
-                         }`}>{service.title}</h4>
-                       </div>
-                       <p className={`text-sm md:text-base font-black ml-7 md:ml-0 ${isDarkMode ? color.icon : 'text-emerald-600'}`}>{service.price}</p>
-                     </div>
-                     
-                     <div className={`p-2 rounded-lg transition-all transform duration-300 ${isSelected ? 'rotate-180' : ''} ${isDarkMode ? 'text-slate-400' : 'text-slate-400'} md:mt-4`}>
-                       <ChevronDown className="w-4 h-4" />
-                     </div>
-                   </button>
-
-                   <AnimatePresence>
-                     {isSelected && (
-                       <motion.div 
-                         initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                         animate={{ opacity: 1, height: 'auto', marginTop: 16 }}
-                         exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                         className="overflow-hidden ml-7 md:ml-0 md:text-center"
-                       >
-                         <p className={`text-xs leading-relaxed mb-4 ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
-                           {service.description}
-                         </p>
-                         
-                         <button 
-                            onClick={() => window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(`Halo Dharma, saya tertarik untuk Book Now layanan ${service.title}.`)}`, '_blank')}
-                            className={`w-full py-2.5 rounded-xl transition-all text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm active:scale-95 ${
-                              isDarkMode 
-                                ? `${color.btn} text-white hover:bg-white/20` 
-                                : 'bg-slate-50 text-slate-500 hover:bg-cyan-600 hover:text-white border border-slate-100'
-                            }`}
-                         >
-                            Book Now
-                            <ArrowRight className="w-3 h-3" />
-                         </button>
-                       </motion.div>
-                     )}
-                   </AnimatePresence>
-                 </div>
-               );
-             })}
-          </div>
-        </section>
-
-        {/* SECTION: Enterprise Package */}
-        <section className="w-full space-y-4 mt-4 max-w-4xl mx-auto">
-          <div className={`p-8 rounded-3xl border relative overflow-hidden ${
-            isDarkMode 
-              ? 'bg-gradient-to-br from-[#021b1a] to-emerald-900/20 border-emerald-500/30' 
-              : 'bg-gradient-to-br from-white to-slate-50 border-slate-200'
-          }`}>
-            <div className="absolute top-0 right-0 p-4 opacity-20">
-              <Rocket className="w-32 h-32 text-emerald-500" />
-            </div>
-            
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-              <div className="space-y-4 text-center md:text-left">
-                <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
-                  isDarkMode ? 'bg-emerald-500/20 text-emerald-400' : 'bg-emerald-100 text-emerald-600'
-                }`}>
-                  <Zap className="w-3 h-3" />
-                  Most Premium
-                </div>
-                <h3 className={`text-2xl md:text-3xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-                  Enterprise Development Package
-                </h3>
-                <p className={`text-sm font-medium max-w-md ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
-                  AI Pro Integration + Premium Development + SaaS Management + Complex Apps + Server & Backend Automation
-                </p>
-              </div>
-
-              <button 
-                onClick={() => window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent("Hi Dharma, I am interested in the Enterprise Development Package.")}`, '_blank')}
-                className={`px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all shadow-lg hover:scale-105 active:scale-95 ${
-                  isDarkMode 
-                    ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-emerald-900/50' 
-                    : 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-cyan-200/50'
-                }`}
+        {/* SECTION 6: Logo Marquee */}
+        <div className="w-full overflow-hidden py-10 space-y-8">
+          <div className="flex flex-col gap-6">
+            {/* Row 1: Right to Left */}
+            <div className="flex overflow-hidden group">
+              <motion.div 
+                animate={{ x: [0, -1000] }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                className="flex items-center gap-12 whitespace-nowrap px-6 shrink-0"
               >
-                By pitching and offering
-              </button>
+                {[
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/claude.png",
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/cursor.png",
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/firebase-logo.png",
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/gemini-logo.png",
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/github-logo.png"
+                ].map((url, i) => (
+                  <img key={i} src={url} alt="tech-logo" className="h-12 md:h-16 w-auto object-contain transition-all [filter:brightness(0)_invert(1)] opacity-60 hover:opacity-100" referrerPolicy="no-referrer" />
+                ))}
+                {/* Duplicate for seamless loop */}
+                {[
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/claude.png",
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/cursor.png",
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/firebase-logo.png",
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/gemini-logo.png",
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/github-logo.png"
+                ].map((url, i) => (
+                  <img key={`dup-${i}`} src={url} alt="tech-logo" className="h-12 md:h-16 w-auto object-contain transition-all [filter:brightness(0)_invert(1)] opacity-60 hover:opacity-100" referrerPolicy="no-referrer" />
+                ))}
+              </motion.div>
+            </div>
+
+            {/* Row 2: Left to Right */}
+            <div className="flex overflow-hidden group">
+              <motion.div 
+                animate={{ x: [-1000, 0] }}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                className="flex items-center gap-12 whitespace-nowrap px-6 shrink-0"
+              >
+                {[
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/google-aistudio_1.png",
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/google-cloud-logo.png",
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/supabase-logo.png",
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/v0-dev.png",
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/vercel-logo.png"
+                ].map((url, i) => (
+                  <img key={i} src={url} alt="tech-logo-2" className="h-12 md:h-16 w-auto object-contain transition-all [filter:brightness(0)_invert(1)] opacity-60 hover:opacity-100" referrerPolicy="no-referrer" />
+                ))}
+                {/* Duplicate for seamless loop */}
+                {[
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/google-aistudio_1.png",
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/google-cloud-logo.png",
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/supabase-logo.png",
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/v0-dev.png",
+                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/vercel-logo.png"
+                ].map((url, i) => (
+                  <img key={`dup2-${i}`} src={url} alt="tech-logo-2" className="h-12 md:h-16 w-auto object-contain transition-all [filter:brightness(0)_invert(1)] opacity-60 hover:opacity-100" referrerPolicy="no-referrer" />
+                ))}
+              </motion.div>
             </div>
           </div>
-        </section>
+        </div>
 
         {/* SECTION 6: Social Links */}
-        <section className="w-full space-y-4 mt-4 max-w-4xl mx-auto">
-           <h3 className={`text-xs font-bold mb-2 tracking-widest uppercase text-center ${isDarkMode ? 'text-emerald-900' : 'text-slate-400'}`}>Connect</h3>
-           <div className="grid grid-cols-3 gap-3 md:gap-6">
-              <a href="https://instagram.com/dharmayanggg" target="_blank" rel="noopener noreferrer" 
-                 className={`flex flex-col items-center justify-center py-5 md:py-8 rounded-2xl border transition-all group hover:shadow-lg hover:-translate-y-1 ${
-                   isDarkMode 
-                     ? 'bg-[#021b1a] border-emerald-900/30 hover:border-pink-500/50 hover:bg-[#032d2b]' 
-                     : 'bg-white border-slate-200 hover:border-pink-500 shadow-sm'
-                 }`}>
-                <span className={`text-sm md:text-base font-bold transition-colors ${
-                  isDarkMode ? 'text-slate-300 group-hover:text-pink-400' : 'text-slate-600 group-hover:text-pink-600'
-                }`}>Instagram</span>
-              </a>
-              <a href="https://threads.net/@dharmayanggg" target="_blank" rel="noopener noreferrer" 
-                 className={`flex flex-col items-center justify-center py-5 md:py-8 rounded-2xl border transition-all group hover:shadow-lg hover:-translate-y-1 ${
-                   isDarkMode 
-                     ? 'bg-[#021b1a] border-emerald-900/30 hover:border-slate-400/50 hover:bg-[#032d2b]' 
-                     : 'bg-white border-slate-200 hover:border-slate-800 shadow-sm'
-                 }`}>
-                <span className={`text-sm md:text-base font-bold transition-colors ${
-                  isDarkMode ? 'text-slate-300 group-hover:text-white' : 'text-slate-600 group-hover:text-slate-900'
-                }`}>Threads</span>
-              </a>
-              <a href={`https://wa.me/${waNumber}?text=${waMessage}`} target="_blank" rel="noopener noreferrer" 
-                 className={`flex flex-col items-center justify-center py-5 md:py-8 rounded-2xl border transition-all group hover:shadow-lg hover:-translate-y-1 ${
-                   isDarkMode 
-                     ? 'bg-[#021b1a] border-emerald-900/30 hover:border-emerald-500/50 hover:bg-[#032d2b]' 
-                     : 'bg-white border-slate-200 hover:border-emerald-500 shadow-sm'
-                 }`}>
-                <span className={`text-sm md:text-base font-bold transition-colors ${
-                  isDarkMode ? 'text-slate-300 group-hover:text-emerald-400' : 'text-slate-600 group-hover:text-emerald-600'
-                }`}>WhatsApp</span>
-              </a>
+           <div className="flex flex-col items-center gap-4 mt-4">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-white">Let's Connect:</p>
+              <div className="flex items-center gap-8">
+                <a href="https://instagram.com/dharmayanggg" target="_blank" rel="noopener noreferrer" 
+                   className="transition-all hover:scale-110 active:scale-95 group">
+                  <Instagram className="w-6 h-6 text-slate-400 group-hover:text-pink-500 transition-colors" />
+                </a>
+                <a href="https://threads.net/@dharmayanggg" target="_blank" rel="noopener noreferrer" 
+                   className="transition-all hover:scale-110 active:scale-95 group">
+                  <AtSign className="w-6 h-6 text-slate-400 group-hover:text-white transition-colors" />
+                </a>
+                <a href={`https://wa.me/${waNumber}?text=${waMessage}`} target="_blank" rel="noopener noreferrer" 
+                   className="transition-all hover:scale-110 active:scale-95 group">
+                  <MessageCircle className="w-6 h-6 text-slate-400 group-hover:text-emerald-500 transition-colors" />
+                </a>
+              </div>
            </div>
-        </section>
 
         {/* Footer */}
-        <footer className={`mt-8 mb-8 text-center space-y-2 ${isDarkMode ? 'text-slate-700' : 'text-slate-400'}`}>
-          <p className="text-[10px] font-black uppercase tracking-[0.3em]">© {new Date().getFullYear()} Dharmayanggg.</p>
+        <footer className="mt-6 mb-4 text-center space-y-2 text-white/60">
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white">© {new Date().getFullYear()} Dharmayanggg.</p>
           <p className="text-[10px] font-bold uppercase tracking-widest opacity-70">This linkbio design by dharmayang</p>
         </footer>
 
