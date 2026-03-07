@@ -9,6 +9,8 @@ import PortfolioGallery from './pages/PortfolioGallery';
 import Services from './pages/Services';
 import DigitalProducts from './pages/DigitalProducts';
 
+import InteractiveCard from './components/InteractiveCard';
+
 // Counter Component for Stats
 const Counter = ({ value, suffix = "" }: { value: number; suffix?: string }) => {
   const [count, setCount] = useState(0);
@@ -181,6 +183,12 @@ function Home() {
         </div>
       </nav>
 
+      <InteractiveCard 
+        name="Dharma Budiyasa" 
+        role="Digital Enthusiast" 
+        imageUrl="https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Pribadi/1772540751342.png" 
+      />
+
       <main className="relative z-10 max-w-5xl mx-auto px-6 pt-6 pb-12 flex flex-col items-center gap-10">
         
         {/* HERO SECTION (SaaS Style) */}
@@ -213,75 +221,10 @@ function Home() {
           </motion.p>
         </section>
 
-        {/* SECTION 1: Profile Header */}
-        <header className="flex flex-col items-center w-full">
-          <div className="relative w-32 h-32 flex justify-center items-center mb-6">
-            {/* Floating Icons around Profile */}
-            <motion.div 
-              animate={{ y: [0, -12, 0], rotate: [0, 10, 0] }}
-              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-              className="absolute -top-2 -right-2 z-30 p-2 bg-emerald-500 rounded-lg shadow-lg text-white"
-            >
-              <TrendingUp className="w-4 h-4" />
-            </motion.div>
-            <motion.div 
-              animate={{ y: [0, 12, 0], rotate: [0, -10, 0] }}
-              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              className="absolute -bottom-2 -left-2 z-30 p-2 bg-cyan-500 rounded-lg shadow-lg text-white"
-            >
-              <Cpu className="w-4 h-4" />
-            </motion.div>
-
-            {/* Cleaner Rings */}
-            <div className={`absolute inset-0 border rounded-full animate-[spin_10s_linear_infinite] ${isDarkMode ? 'border-emerald-500/20' : 'border-cyan-500/30'}`}></div>
-            <div className={`absolute inset-2 border rounded-full animate-[spin_12s_linear_infinite_reverse] ${isDarkMode ? 'border-teal-500/20' : 'border-blue-500/30'}`}></div>
-            
-            <div className={`w-28 h-28 rounded-full overflow-hidden relative z-10 border-4 shadow-xl flex items-center justify-center ${isDarkMode ? 'bg-[#021b1a] border-[#021b1a]' : 'bg-white border-white'}`}>
-              <img 
-                src="https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Pribadi/1772540751342.png" 
-                alt="Dharma Budiyasa" 
-                className="w-full h-full object-cover pointer-events-none"
-                onContextMenu={(e) => e.preventDefault()}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.onerror = null;
-                  target.src = isDarkMode 
-                    ? "https://api.dicebear.com/9.x/avataaars/svg?seed=Dharmayanggg&backgroundColor=0f172a"
-                    : "https://api.dicebear.com/9.x/avataaars/svg?seed=Dharmayanggg&backgroundColor=e2e8f0";
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 mb-3">
-            <a href="https://instagram.com/dharmayanggg" target="_blank" rel="noopener noreferrer" className={`text-2xl font-bold hover:text-emerald-500 transition-colors tracking-tight ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-              Dharma Budiyasa
-            </a>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className={`text-xs border px-4 py-1.5 rounded-full font-bold flex items-center gap-2 transition-all shadow-sm ${
-                 isDarkMode 
-                   ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' 
-                   : 'bg-cyan-50 border-cyan-100 text-cyan-600'
-               }`}>
-              <Rocket className="w-3 h-3" />
-              Digital Kreator
-            </div>
-            <div 
-               className={`text-xs border px-4 py-1.5 rounded-full font-bold flex items-center gap-2 transition-all shadow-sm ${
-                 isDarkMode 
-                   ? 'bg-[#021b1a] border-emerald-900/50 text-emerald-400' 
-                   : 'bg-white border-slate-200 text-slate-600'
-               }`}
-            >
-              <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
-              Tabanan, Bali
-            </div>
-          </div>
-
+        {/* Action & Stats Container */}
+        <div className="w-full max-w-4xl mx-auto flex flex-col gap-4 mt-8">
           {/* Project Stats Section */}
-          <div className="grid grid-cols-3 gap-4 md:gap-8 w-full max-w-4xl mx-auto mt-8">
+          <div className="grid grid-cols-3 gap-4 md:gap-8 w-full">
             {[
               { label: 'Project', value: 100, suffix: '+' },
               { label: 'Websites', value: 50, suffix: '+' },
@@ -309,7 +252,7 @@ function Home() {
           </div>
 
           {/* New Buttons Section: Service, Product Digital */}
-          <div className="grid grid-cols-2 gap-4 md:gap-8 w-full max-w-4xl mx-auto mt-6">
+          <div className="grid grid-cols-2 gap-4 md:gap-8 w-full">
             <Link 
               to="/services"
               className={`p-3 rounded-xl font-bold text-[10px] md:text-sm flex flex-col items-center justify-center gap-2 transition-all duration-300 border backdrop-blur-md group hover:-translate-y-1 active:scale-95 text-center h-full w-full ${
@@ -335,7 +278,7 @@ function Home() {
             </Link>
           </div>
 
-          <div className="w-full max-w-4xl mx-auto mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-3">
             <Link 
               to="/portfolio"
               className={`p-4 rounded-xl font-bold text-sm flex items-center justify-start px-6 gap-3 transition-all duration-300 border backdrop-blur-md group hover:-translate-y-1 active:scale-[0.98] ${
@@ -363,7 +306,7 @@ function Home() {
               <ExternalLink className="w-4 h-4 opacity-50 ml-auto" />
             </a>
           </div>
-        </header>
+        </div>
 
         {/* SECTION 2: Expertise */}
         <section className="w-full space-y-4">
