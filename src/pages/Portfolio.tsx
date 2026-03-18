@@ -178,24 +178,24 @@ const Portfolio: React.FC = () => {
   const currentProject = projects[activeProject];
 
   return (
-    <div className="min-h-screen bg-[#010b0a] text-slate-300 font-sans flex flex-col overflow-hidden">
+    <div className="min-h-screen bg-white text-slate-800 font-sans flex flex-col overflow-hidden">
       {/* Top Navigation */}
-      <nav className="h-14 border-b border-emerald-900/20 bg-[#010b0a]/90 backdrop-blur-md shrink-0 z-50">
+      <nav className="h-14 border-b border-gray-200 bg-white/90 backdrop-blur-md shrink-0 z-50">
         <div className="max-w-2xl mx-auto px-4 h-full flex items-center justify-between">
-          <Link to="/portfolio" className="p-2 -ml-2 text-slate-400 hover:text-emerald-500 transition-colors">
+          <Link to="/portfolio" className="p-2 -ml-2 text-slate-400 hover:text-black transition-colors">
             <ArrowLeft className="w-5 h-5" />
           </Link>
           
           <div className="flex flex-col items-center">
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500 leading-none mb-1">Previewing</span>
-            <span className="text-xs font-bold text-white truncate max-w-[150px]">{currentProject.title}</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 leading-none mb-1">Previewing</span>
+            <span className="text-xs font-bold text-black truncate max-w-[150px]">{currentProject.title}</span>
           </div>
 
           <a 
             href={currentProject.url} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="p-2 -mr-2 text-emerald-500 hover:text-emerald-400 transition-colors"
+            className="p-2 -mr-2 text-black hover:text-gray-600 transition-colors"
           >
             <ExternalLink className="w-5 h-5" />
           </a>
@@ -206,10 +206,10 @@ const Portfolio: React.FC = () => {
       <main className="flex-1 relative flex flex-col items-center p-4 overflow-y-auto">
         {/* Info Section */}
         <div className="w-full max-w-2xl space-y-6 py-8">
-          <div className="p-6 md:p-10 rounded-[2.5rem] bg-white/5 border border-white/10 relative overflow-hidden space-y-10">
+          <div className="p-6 md:p-10 rounded-[2.5rem] bg-white border border-gray-200 relative overflow-hidden space-y-10 shadow-sm">
             {/* 1. Thumbnail Image */}
             <div 
-              className="aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl cursor-pointer"
+              className="aspect-square rounded-3xl overflow-hidden border border-gray-200 shadow-sm cursor-pointer"
               onClick={() => setSelectedImage(currentProject.image)}
             >
               <img 
@@ -222,8 +222,8 @@ const Portfolio: React.FC = () => {
 
             {/* 2. Explanation and Description */}
             <div className="space-y-4">
-              <h4 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight leading-tight">{currentProject.title}</h4>
-              <p className="text-base md:text-lg text-slate-400 leading-relaxed">{currentProject.description}</p>
+              <h4 className="text-3xl md:text-4xl font-black text-black uppercase tracking-tight leading-tight">{currentProject.title}</h4>
+              <p className="text-base md:text-lg text-slate-500 leading-relaxed">{currentProject.description}</p>
             </div>
 
             {/* 3. Live Preview Button */}
@@ -231,24 +231,24 @@ const Portfolio: React.FC = () => {
               href={currentProject.url} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-3 w-full py-5 rounded-2xl bg-emerald-500 text-[#010b0a] font-black uppercase tracking-widest text-sm hover:bg-emerald-400 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_10px_30px_rgba(16,185,129,0.2)]"
+              className="flex items-center justify-center gap-3 w-full py-5 rounded-2xl bg-black text-white font-black uppercase tracking-widest text-sm hover:bg-gray-800 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-sm"
             >
               Visit Live Site <ExternalLink className="w-5 h-5" />
             </a>
 
             {/* 4. Project Value */}
-            <div className="pt-8 border-t border-white/5">
+            <div className="pt-8 border-t border-gray-200">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-black uppercase tracking-widest text-slate-500">Project Value</span>
-                <span className="text-2xl font-black text-emerald-500">Rp {currentProject.value}</span>
+                <span className="text-xs font-black uppercase tracking-widest text-slate-400">Project Value</span>
+                <span className="text-2xl font-black text-black">Rp {currentProject.value}</span>
               </div>
             </div>
             
             {/* 5. Tools Used */}
-            <div className="space-y-6 pt-8 border-t border-white/5">
+            <div className="space-y-6 pt-8 border-t border-gray-200">
               <div className="flex items-center gap-2">
-                <p className="text-xs font-black uppercase tracking-widest text-emerald-500">Tech Stack & Tools</p>
-                <Info className="w-4 h-4 text-emerald-500/50" />
+                <p className="text-xs font-black uppercase tracking-widest text-gray-500">Tech Stack & Tools</p>
+                <Info className="w-4 h-4 text-gray-300" />
               </div>
               <div className="flex flex-wrap gap-8 items-center">
                 {(currentProject as any).logos.map((logo: string, i: number) => {
@@ -270,7 +270,7 @@ const Portfolio: React.FC = () => {
                       <img 
                         src={logo} 
                         alt="tool" 
-                        className="h-12 w-auto object-contain transition-all [filter:brightness(0)_invert(1)] opacity-80 group-hover:opacity-100" 
+                        className="h-12 w-auto object-contain transition-all opacity-80 group-hover:opacity-100" 
                         referrerPolicy="no-referrer" 
                       />
                     </motion.button>
@@ -291,38 +291,38 @@ const Portfolio: React.FC = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedTool(null)}
-              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
             />
             <motion.div 
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="relative w-full max-w-sm bg-[#010b0a] border border-emerald-500/30 rounded-3xl p-8 shadow-[0_0_50px_rgba(16,185,129,0.1)]"
+              className="relative w-full max-w-sm bg-white border border-gray-200 rounded-3xl p-8 shadow-xl"
             >
               <button 
                 onClick={() => setSelectedTool(null)}
-                className="absolute top-4 right-4 p-2 text-slate-500 hover:text-white transition-colors"
+                className="absolute top-4 right-4 p-2 text-slate-400 hover:text-black transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
 
               <div className="flex flex-col items-center text-center space-y-4">
-                <div className="w-20 h-20 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 mb-2 p-4">
+                <div className="w-20 h-20 rounded-2xl bg-gray-50 flex items-center justify-center border border-gray-200 mb-2 p-4">
                   <img 
                     src={selectedTool.logo} 
                     alt={selectedTool.name} 
-                    className="w-full h-full object-contain [filter:brightness(0)_invert(1)]"
+                    className="w-full h-full object-contain"
                     referrerPolicy="no-referrer"
                   />
                 </div>
-                <h3 className="text-xl font-black text-white uppercase tracking-wider">{selectedTool.name}</h3>
-                <div className="w-12 h-1 bg-emerald-500 rounded-full" />
-                <p className="text-slate-400 leading-relaxed text-sm">
+                <h3 className="text-xl font-black text-black uppercase tracking-wider">{selectedTool.name}</h3>
+                <div className="w-12 h-1 bg-black rounded-full" />
+                <p className="text-slate-500 leading-relaxed text-sm">
                   {selectedTool.description}
                 </p>
                 <button 
                   onClick={() => setSelectedTool(null)}
-                  className="mt-4 w-full py-3 rounded-xl bg-emerald-500 text-[#010b0a] font-black uppercase tracking-widest text-xs hover:bg-emerald-400 transition-colors"
+                  className="mt-4 w-full py-3 rounded-xl bg-black text-white font-black uppercase tracking-widest text-xs hover:bg-gray-800 transition-colors"
                 >
                   Close
                 </button>

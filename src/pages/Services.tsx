@@ -4,7 +4,6 @@ import { Laptop, ArrowLeft, ChevronDown, ArrowRight, Rocket, Zap, Smartphone, Co
 import { Link } from 'react-router-dom';
 
 const Services: React.FC = () => {
-  const isDarkMode = true;
   const waNumber = "6282342344558";
   const [selectedService, setSelectedService] = useState<number | null>(null);
 
@@ -40,22 +39,20 @@ const Services: React.FC = () => {
   ];
 
   return (
-    <div className={`min-h-screen font-sans pb-20 transition-colors duration-300 ${isDarkMode ? 'bg-[#010b0a] text-slate-300' : 'bg-slate-50 text-slate-800'}`}>
+    <div className="min-h-screen font-sans pb-20 bg-white text-slate-800">
       {/* Background Ornaments */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className={`absolute top-0 left-0 w-full h-96 bg-gradient-to-b ${isDarkMode ? 'from-[#021b1a] to-transparent' : 'from-slate-100 to-transparent'}`}></div>
-        <div className={`absolute top-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full blur-[120px] ${isDarkMode ? 'bg-emerald-900/20' : 'bg-cyan-100/50'}`}></div>
-        <div className={`absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full blur-[120px] ${isDarkMode ? 'bg-teal-900/20' : 'bg-blue-100/50'}`}></div>
+        <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-gray-50 to-transparent"></div>
       </div>
 
-      <nav className={`sticky top-0 z-50 w-full border-b backdrop-blur-md transition-all ${isDarkMode ? 'bg-[#010b0a]/80 border-emerald-900/20' : 'bg-white/80 border-slate-200'}`}>
+      <nav className="sticky top-0 z-50 w-full border-b backdrop-blur-md bg-white/80 border-gray-200">
         <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link to="/" className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:text-emerald-500 transition-colors">
+          <Link to="/" className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-black/5 border border-black/10 text-slate-400 hover:text-black transition-colors">
             <ArrowLeft className="w-5 h-5" />
           </Link>
           <div className="flex items-center gap-2">
-            <Laptop className="w-5 h-5 text-emerald-500" />
-            <span className="font-black tracking-tighter text-lg text-white">Services</span>
+            <Laptop className="w-5 h-5 text-black" />
+            <span className="font-black tracking-tighter text-lg text-black">Services</span>
           </div>
         </div>
       </nav>
@@ -64,31 +61,27 @@ const Services: React.FC = () => {
         {/* SERVICES SECTION */}
         <section className="w-full space-y-8">
           <div className="text-center">
-            <h3 className={`text-xs font-bold mb-2 tracking-widest uppercase flex items-center justify-center gap-3 ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>
-              <span className={`w-6 h-[2px] ${isDarkMode ? 'bg-slate-800' : 'bg-slate-200'}`}></span>
+            <h3 className="text-xs font-bold mb-2 tracking-widest uppercase flex items-center justify-center gap-3 text-slate-400">
+              <span className="w-6 h-[2px] bg-slate-200"></span>
               Services for Company
-              <span className={`w-6 h-[2px] ${isDarkMode ? 'bg-slate-800' : 'bg-slate-200'}`}></span>
+              <span className="w-6 h-[2px] bg-slate-200"></span>
             </h3>
-            <h2 className={`text-3xl md:text-4xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'} tracking-tight`}>Solusi Digital Strategis</h2>
+            <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">Solusi Digital Strategis</h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
              {services.map((service, i) => {
                const isSelected = selectedService === service.id;
                const colors = [
-                 { border: 'hover:border-orange-500/50', icon: 'text-orange-400', bg: 'bg-orange-500', btn: 'bg-orange-500' },
-                 { border: 'hover:border-blue-500/50', icon: 'text-blue-400', bg: 'bg-blue-500', btn: 'bg-blue-500' },
-                 { border: 'hover:border-pink-500/50', icon: 'text-pink-400', bg: 'bg-pink-500', btn: 'bg-pink-500' },
-                 { border: 'hover:border-teal-500/50', icon: 'text-teal-400', bg: 'bg-teal-500', btn: 'bg-teal-500' },
+                 { border: 'hover:border-black/30', icon: 'text-black', bg: 'bg-black', btn: 'bg-black' },
+                 { border: 'hover:border-black/30', icon: 'text-black', bg: 'bg-black', btn: 'bg-black' },
+                 { border: 'hover:border-black/30', icon: 'text-black', bg: 'bg-black', btn: 'bg-black' },
+                 { border: 'hover:border-black/30', icon: 'text-black', bg: 'bg-black', btn: 'bg-black' },
                ];
                const color = colors[i % colors.length];
 
                return (
-                 <div key={service.id} className={`group relative flex flex-col p-6 rounded-2xl border transition-all duration-300 hover:shadow-lg backdrop-blur-md overflow-hidden ${
-                   isDarkMode 
-                     ? `bg-white/5 border-white/10 ${color.border}` 
-                     : 'bg-white border-slate-200 hover:border-cyan-500'
-                 }`}>
+                 <div key={service.id} className={`group relative flex flex-col p-6 rounded-2xl border transition-all duration-300 hover:shadow-md backdrop-blur-md overflow-hidden bg-white border-gray-200 ${color.border}`}>
                    <button 
                      onClick={() => setSelectedService(isSelected ? null : service.id)}
                      className="flex items-center justify-between w-full text-left"
@@ -98,14 +91,12 @@ const Services: React.FC = () => {
                          <div className={`${color.icon} shrink-0`}>
                            {React.cloneElement(service.icon as React.ReactElement, { className: "w-5 h-5" })}
                          </div>
-                         <h4 className={`font-bold text-sm md:text-base transition-colors leading-tight ${
-                           isDarkMode ? 'text-slate-200 group-hover:text-white' : 'text-slate-800 group-hover:text-cyan-700'
-                         }`}>{service.title}</h4>
+                         <h4 className="font-bold text-sm md:text-base transition-colors leading-tight text-slate-800 group-hover:text-black">{service.title}</h4>
                        </div>
-                       <p className={`text-sm font-black ml-8 ${isDarkMode ? color.icon : 'text-emerald-600'}`}>{service.price}</p>
+                       <p className="text-sm font-black ml-8 text-slate-500">{service.price}</p>
                      </div>
                      
-                     <div className={`p-2 rounded-lg transition-all transform duration-300 ${isSelected ? 'rotate-180' : ''} ${isDarkMode ? 'text-slate-400' : 'text-slate-400'}`}>
+                     <div className={`p-2 rounded-lg transition-all transform duration-300 ${isSelected ? 'rotate-180' : ''} text-slate-400`}>
                        <ChevronDown className="w-4 h-4" />
                      </div>
                    </button>
@@ -118,17 +109,13 @@ const Services: React.FC = () => {
                          exit={{ opacity: 0, height: 0, marginTop: 0 }}
                          className="overflow-hidden ml-8"
                        >
-                         <p className={`text-xs leading-relaxed mb-4 ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+                         <p className="text-xs leading-relaxed mb-4 text-slate-500">
                            {service.description}
                          </p>
                          
                          <button 
                             onClick={() => window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(`Halo Dharma, saya tertarik untuk Book Now layanan ${service.title}.`)}`, '_blank')}
-                            className={`w-full py-2.5 rounded-xl transition-all text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm active:scale-95 ${
-                              isDarkMode 
-                                ? `${color.btn} text-white hover:bg-white/20` 
-                                : 'bg-slate-50 text-slate-500 hover:bg-cyan-600 hover:text-white border border-slate-100'
-                            }`}
+                            className="w-full py-2.5 rounded-xl transition-all text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm active:scale-95 bg-black text-white hover:bg-gray-800"
                          >
                             Book Now
                             <ArrowRight className="w-3 h-3" />
@@ -144,38 +131,28 @@ const Services: React.FC = () => {
 
         {/* ENTERPRISE PACKAGE SECTION */}
         <section className="w-full space-y-4">
-          <div className={`p-8 rounded-3xl border relative overflow-hidden ${
-            isDarkMode 
-              ? 'bg-gradient-to-br from-[#021b1a] to-emerald-900/20 border-emerald-500/30' 
-              : 'bg-gradient-to-br from-white to-slate-50 border-slate-200'
-          }`}>
-            <div className="absolute top-0 right-0 p-4 opacity-20">
-              <Rocket className="w-32 h-32 text-emerald-500" />
+          <div className="p-8 rounded-3xl border relative overflow-hidden bg-white border-gray-200 shadow-sm">
+            <div className="absolute top-0 right-0 p-4 opacity-5">
+              <Rocket className="w-32 h-32 text-black" />
             </div>
             
             <div className="relative z-10 flex flex-col items-start gap-8">
               <div className="space-y-4">
-                <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
-                  isDarkMode ? 'bg-emerald-500/20 text-emerald-400' : 'bg-emerald-100 text-emerald-600'
-                }`}>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-black/5 text-black">
                   <Zap className="w-3 h-3" />
                   Most Premium
                 </div>
-                <h3 className={`text-2xl md:text-3xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+                <h3 className="text-2xl md:text-3xl font-black text-slate-900">
                   Enterprise Development Package
                 </h3>
-                <p className={`text-sm font-medium max-w-md ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+                <p className="text-sm font-medium max-w-md text-slate-500">
                   AI Pro Integration + Premium Development + SaaS Management + Complex Apps + Server & Backend Automation
                 </p>
               </div>
 
               <button 
                 onClick={() => window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent("Hi Dharma, I am interested in the Enterprise Development Package.")}`, '_blank')}
-                className={`px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all shadow-lg hover:scale-105 active:scale-95 ${
-                  isDarkMode 
-                    ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-emerald-900/50' 
-                    : 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-cyan-200/50'
-                }`}
+                className="px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all shadow-sm hover:scale-105 active:scale-95 bg-black text-white hover:bg-gray-800"
               >
                 By pitching and offering
               </button>

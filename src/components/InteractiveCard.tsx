@@ -3,7 +3,7 @@ import { motion, useMotionValue, useSpring, useTransform, animate } from 'framer
 import { 
   Code2, Github, Linkedin, Cpu, Terminal, QrCode, 
   Instagram, AtSign, MessageCircle, TrendingUp, 
-  MapPin
+  MapPin, Lightbulb
 } from 'lucide-react';
 
 interface InteractiveCardProps {
@@ -76,25 +76,22 @@ export default function InteractiveCard({ name, role, imageUrl }: InteractiveCar
   const lanyardPath = useTransform(
     [springX, springY, idleY, idleRotate],
     ([sx, sy, iy, ir]) => {
-      const x = Number(sx);
-      const y = Number(sy) + Number(iy);
-      const rot = Number(ir);
-      
-      const radius = 238; 
+      const x = Number(sx) || 0;
+      const y = (Number(sy) || 0) + (Number(iy) || 0);
+      const rot = Number(ir) || 0;
       const rad = (rot * Math.PI) / 180;
       
-      const tipX = 400 + x + (Math.sin(rad) * radius);
-      const tipY = 485 + y - (Math.cos(rad) * radius); // Lowered to match the new clip position
+      // Card center is at (400, 496) in SVG space
+      // distanceToHole is the distance from card center to the clip attachment point
+      const distanceToHole = 235; 
+      const tipX = 400 + x + Math.sin(rad) * distanceToHole;
+      const tipY = 496 + y - Math.cos(rad) * distanceToHole;
 
-      const cpX1 = 360 + x * 0.3;
-      const cpY1 = (tipY - 100) * 0.5;
-      
-      const cpX2 = 440 + x * 0.3;
-      const cpY2 = (tipY - 100) * 0.5;
-
-      return `M 320 -100 
-              Q ${cpX1} ${cpY1} ${tipX} ${tipY} 
-              Q ${cpX2} ${cpY2} 480 -100`;
+      // Two strands meeting at the clip - stiffer curve
+      return `M 300 0 
+              C 300 50, ${tipX - 10} ${tipY - 50}, ${tipX} ${tipY}
+              M 500 0
+              C 500 50, ${tipX + 10} ${tipY - 50}, ${tipX} ${tipY}`;
     }
   );
 
@@ -189,24 +186,27 @@ export default function InteractiveCard({ name, role, imageUrl }: InteractiveCar
         className="relative flex items-center justify-center w-full h-full"
         style={{ perspective: '1200px' }}
       >
-        <svg className="absolute left-1/2 top-1/2 w-[800px] h-[800px] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0">
+        <svg 
+          viewBox="0 0 800 800"
+          className="absolute left-1/2 top-1/2 w-[800px] h-[800px] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0 overflow-visible"
+        >
           <defs>
-            <linearGradient id="lanyardGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#34d399" />
-              <stop offset="100%" stopColor="#064e3b" />
+            <linearGradient id="lanyardGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#333333" />
+              <stop offset="50%" stopColor="#111111" />
+              <stop offset="100%" stopColor="#333333" />
             </linearGradient>
-            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="10" stdDeviation="5" floodOpacity="0.3" />
+            <filter id="lanyardShadow" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="15" stdDeviation="8" floodOpacity="0.4" />
             </filter>
           </defs>
           
           <motion.path
             d={lanyardPath}
             stroke="url(#lanyardGradient)"
-            strokeWidth="18"
+            strokeWidth="22"
             fill="none"
             strokeLinecap="round"
-            filter="url(#shadow)"
           />
         </svg>
 
@@ -231,150 +231,155 @@ export default function InteractiveCard({ name, role, imageUrl }: InteractiveCar
           }}
           className="relative z-10 cursor-grab active:cursor-grabbing touch-none flex flex-col items-center mt-24"
         >
-          {/* 🔥 FIX 1: KLIP BESI - Posisi diturunkan 20% (dari -top-10 ke -top-6) */}
-          <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-[35.57px] h-[49.92px] bg-gradient-to-b from-gray-300 to-gray-500 rounded-sm shadow-md z-20 border border-gray-400 flex flex-col items-center justify-start pt-1">
-            <div className="w-[11.86px] h-[11.86px] border border-gray-600 rounded-full bg-gray-400/20 shadow-inner flex items-center justify-center">
-              <div className="w-[5.93px] h-[5.93px] bg-gray-600 rounded-full"></div>
+          {/* 🔥 REFINED SIMPLE METAL CLIP */}
+          <div className="absolute -top-[38px] left-1/2 -translate-x-1/2 w-[36px] h-[54px] flex flex-col items-center z-20 pointer-events-none">
+            {/* Polished Swivel */}
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-300 to-gray-500 border border-gray-400 shadow-md mb-[-14px] z-30 flex items-center justify-center">
+              <div className="w-2 h-2 rounded-full bg-gray-600/40"></div>
             </div>
-            <div className="w-[29.64px] h-[12.48px] bg-gray-400 mt-auto border-t border-gray-500 rounded-b-sm mb-0.5 flex items-center justify-center">
-              <div className="w-[17.78px] h-[3.12px] bg-gray-600/30 rounded-full"></div>
+            {/* Clean Body */}
+            <div className="w-full h-full bg-gradient-to-b from-gray-100 to-gray-300 rounded-md shadow-xl border border-gray-200 flex flex-col items-center pt-4">
+              <div className="w-4 h-1 bg-gray-400/30 rounded-full mb-1"></div>
+              <div className="w-1 h-1 rounded-full bg-gray-400/50"></div>
             </div>
           </div>
 
           <motion.div
             ref={cardRef}
-            className="relative w-80 h-[480px] group"
+            className="relative w-[280px] h-[420px] group"
             style={{ transformStyle: 'preserve-3d', rotateX: springRotateX }}
             animate={{ rotateY: isFlipped ? 180 : 0 }}
             transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
           >
-            {/* FRONT FACE */}
+            {/* FRONT FACE - 70% Black Gradient Theme */}
             <motion.div 
-              className="absolute inset-0 bg-emerald-500/10 backdrop-blur-2xl border border-emerald-500/20 rounded-2xl shadow-2xl overflow-hidden"
+              className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-700 border border-white/10 rounded-xl shadow-2xl overflow-hidden"
               style={{ backfaceVisibility: 'hidden', rotateY: useTransform(springRotateY, y => y) }}
             >
+              {/* Lightbulb Silhouette */}
+              <div className="absolute -right-10 -bottom-10 opacity-[0.1] pointer-events-none rotate-[-45deg]">
+                <Lightbulb className="w-64 h-64 text-white" />
+              </div>
+
               <div 
                 className="absolute inset-0 transition-opacity duration-300 mix-blend-overlay pointer-events-none"
                 style={{
-                  background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 60%)`,
+                  background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 60%)`,
                   opacity: glare.opacity,
                 }}
               />
               
               <div 
-                className="absolute inset-0 flex flex-col items-center px-6 pt-6 pb-8 pointer-events-none"
+                className="absolute inset-0 flex flex-col items-center justify-center px-6 py-8 pointer-events-none scale-[0.85] md:scale-90"
                 style={{ transform: 'translateZ(50px)' }}
               >
-                <div className="w-12 h-1.5 bg-slate-900/50 rounded-full mb-6 shadow-inner border border-white/5"></div>
+                <div className="w-10 h-1 bg-white/10 rounded-full mb-5 shadow-inner"></div>
 
                 <div className="relative mb-5">
                   <motion.div 
-                    animate={{ y: [0, -8, 0], rotate: [0, 10, 0] }}
+                    animate={{ y: [0, -3, 0], rotate: [0, 5, 0] }}
                     transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-                    className="absolute -top-2 -right-3 z-30 p-2 bg-emerald-500 rounded-lg shadow-lg text-white"
+                    className="absolute -top-1 -right-2 z-30 p-1 bg-white rounded-md shadow-lg text-black"
                   >
-                    <TrendingUp className="w-4 h-4" />
+                    <TrendingUp className="w-3.5 h-3.5" />
                   </motion.div>
                   <motion.div 
-                    animate={{ y: [0, 8, 0], rotate: [0, -10, 0] }}
+                    animate={{ y: [0, 3, 0], rotate: [0, -5, 0] }}
                     transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                    className="absolute -bottom-2 -left-3 z-30 p-2 bg-cyan-500 rounded-lg shadow-lg text-white"
+                    className="absolute -bottom-1 -left-2 z-30 p-1 bg-gray-200 rounded-md shadow-lg text-black"
                   >
-                    <Cpu className="w-4 h-4" />
+                    <Cpu className="w-3.5 h-3.5" />
                   </motion.div>
 
-                  <div className="w-32 h-32 rounded-full bg-gradient-to-br from-emerald-500 to-lime-500 p-1.5 shadow-lg">
-                    <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center overflow-hidden relative">
-                      <img src={imageUrl} alt={name} className="w-full h-full object-cover" />
+                  <div className="w-28 h-28 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 p-1 shadow-lg">
+                    <div className="w-full h-full rounded-full bg-black flex items-center justify-center overflow-hidden relative">
+                      <img src={imageUrl} alt={name} className="w-full h-full object-cover transition-all duration-500" />
                     </div>
                   </div>
-                  <div className="absolute bottom-0 right-0 bg-emerald-500 text-slate-900 p-2 rounded-full border-2 border-slate-900 shadow-xl">
-                    <Terminal className="w-5 h-5" />
+                  <div className="absolute bottom-0 right-0 bg-white text-black p-1.5 rounded-full border border-black shadow-xl">
+                    <Terminal className="w-4 h-4" />
                   </div>
                 </div>
 
-                <h2 className="text-3xl font-black text-white tracking-tight mb-2">{name}</h2>
-                <div className="flex flex-row items-center justify-center gap-2 mb-2 w-full px-2">
-                  <div className="bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full whitespace-nowrap flex items-center gap-1.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_5px_rgba(16,185,129,0.5)]"></div>
-                    <p className="text-slate-400 font-bold text-[9px] tracking-widest uppercase">{role}</p>
+                <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight mb-2">{name}</h2>
+                <div className="flex flex-row items-center justify-center gap-1.5 mb-6 w-full px-2">
+                  <div className="bg-white/20 backdrop-blur-md border border-white/20 px-2 py-1 rounded-full whitespace-nowrap flex items-center gap-1">
+                    <div className="w-1 h-1 rounded-full bg-white animate-pulse shadow-[0_0_5px_rgba(255,255,255,0.4)]"></div>
+                    <p className="text-white font-medium text-[8px] md:text-[10px] tracking-widest uppercase">{role}</p>
                   </div>
-                  <div className="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full flex items-center gap-1.5 whitespace-nowrap">
-                    <MapPin className="w-3 h-3 text-emerald-500" />
-                    <p className="text-slate-400 font-bold text-[9px] tracking-widest uppercase">Tabanan, Bali</p>
+                  <div className="bg-white/20 backdrop-blur-md border border-white/20 px-2 py-1 rounded-full flex items-center gap-1 whitespace-nowrap">
+                    <MapPin className="w-2.5 h-2.5 text-gray-300" />
+                    <p className="text-white font-medium text-[8px] md:text-[10px] tracking-widest uppercase">Tabanan, Bali</p>
                   </div>
                 </div>
 
-                {/* 🔥 FIX: LOGO TOOLS - Neon Box & 8 Logos */}
-                <div className="w-full px-1 mb-2 mt-4">
-                  <p className="text-emerald-400 font-bold text-[8px] tracking-[0.2em] uppercase mb-2 text-center opacity-70">Development Tools</p>
-                  <div className="w-full border border-emerald-500/50 rounded-xl p-2.5 bg-emerald-500/5 shadow-[0_0_15px_rgba(16,185,129,0.2)] backdrop-blur-sm flex flex-wrap justify-center items-center gap-x-4 gap-y-2">
-                    {techLogos.map((logo, i) => (
-                      <img 
-                        key={i} 
-                        src={logo} 
-                        alt="tech" 
-                        className="h-5 w-auto object-contain [filter:brightness(0)_invert(1)] opacity-80 hover:opacity-100 transition-opacity" 
-                      />
+                {/* General Skills Section */}
+                <div className="flex flex-col items-center gap-1.5 mb-8 w-full">
+                  <p className="text-[10px] md:text-xs font-black text-gray-400 tracking-[0.2em] mb-1.5 uppercase">GENERAL SKILL</p>
+                  <div className="flex flex-wrap justify-center gap-2">
+                    {['Graphic Design', 'Web/Apps Development', 'Social Media Specialist'].map((skill) => (
+                      <span key={skill} className="text-[11px] md:text-xs font-bold px-2.5 py-1.5 bg-white/20 backdrop-blur-md border border-white/20 rounded-sm text-white tracking-tighter uppercase">
+                        {skill}
+                      </span>
                     ))}
                   </div>
                 </div>
 
-                <div className="flex gap-5 mt-auto pointer-events-auto">
-                  <a href="https://instagram.com/dharmayanggg" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white/5 border border-white/10 hover:bg-emerald-500/20 hover:border-emerald-500/50 transition-all group">
+                <div className="flex gap-4 mb-2 pointer-events-auto relative z-50">
+                  <a href="https://instagram.com/dharmayanggg" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white/10 border border-white/20 hover:bg-white/30 hover:scale-110 transition-all group backdrop-blur-md">
                     <Instagram className="w-4 h-4 text-white transition-colors" />
                   </a>
-                  <a href="https://threads.net/@dharmayanggg" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white/5 border border-white/10 hover:bg-emerald-500/20 hover:border-emerald-500/50 transition-all group">
+                  <a href="https://threads.net/@dharmayanggg" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white/10 border border-white/20 hover:bg-white/30 hover:scale-110 transition-all group backdrop-blur-md">
                     <AtSign className="w-4 h-4 text-white transition-colors" />
                   </a>
-                  <a href="https://wa.me/6282342344558" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white/5 border border-white/10 hover:bg-emerald-500/20 hover:border-emerald-500/50 transition-all group">
+                  <a href="https://wa.me/6282342344558" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white/10 border border-white/20 hover:bg-white/30 hover:scale-110 transition-all group backdrop-blur-md">
                     <MessageCircle className="w-4 h-4 text-white transition-colors" />
                   </a>
                 </div>
               </div>
             </motion.div>
 
-            {/* BACK FACE */}
+            {/* BACK FACE - Dark Theme */}
             <motion.div 
-              className="absolute inset-0 bg-[#021b1a] border border-emerald-900/30 rounded-2xl shadow-2xl overflow-hidden"
+              className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-700 border border-white/10 rounded-xl shadow-2xl overflow-hidden"
               style={{ backfaceVisibility: 'hidden', rotateY: useTransform(springRotateY, y => y + 180) }}
             >
-              {/* 🔥 FIX 3: STRIP HITAM - Dinaikkan jadi mt-8 agar pas di bawah klip, tidak kejauhan */}
-              <div className="w-full h-10 bg-black/60 mt-8 shadow-inner flex items-center justify-center">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                  <p className="text-emerald-400 font-black font-mono text-[10px] tracking-[0.2em] uppercase">Open to Work</p>
+              {/* 🔥 FIX 3: STRIP HITAM - Vercel Dark Style */}
+              <div className="w-full h-7 bg-white/5 mt-10 shadow-inner flex items-center justify-center border-y border-white/5">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div>
+                  <p className="text-white font-bold font-mono text-[9px] tracking-[0.2em] uppercase">Open to Work</p>
                 </div>
               </div>
 
               <div 
-                className="flex flex-col items-center justify-start p-6 mt-8 pointer-events-none h-full"
+                className="flex flex-col items-center justify-start p-6 mt-8 pointer-events-none h-full scale-[0.85] md:scale-90"
                 style={{ transform: 'translateZ(30px)' }}
               >
-                <div className="bg-white p-4 rounded-2xl shadow-[0_0_40px_rgba(16,185,129,0.3)] mb-8 flex flex-col items-center border border-white">
+                <div className="bg-white/5 backdrop-blur-md p-3 rounded-xl shadow-xl mb-3 flex flex-col items-center border border-white/10">
                   {/* Real QR Code for WhatsApp */}
-                  <div className="w-32 h-32 bg-white rounded-lg flex items-center justify-center overflow-hidden">
+                  <div className="w-24 h-24 bg-white rounded-lg flex items-center justify-center overflow-hidden">
                     <img 
                       src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/6282342344558" 
                       alt="WhatsApp QR" 
-                      className="w-full h-full p-1"
+                      className="w-full h-full p-0.5"
                       referrerPolicy="no-referrer"
                     />
                   </div>
-                  <div className="mt-3 text-center">
-                    <p className="text-slate-900 font-black font-mono text-[10px] tracking-widest uppercase">Made by dharmayang</p>
+                  <div className="mt-2 text-center">
+                    <p className="text-white font-bold font-mono text-[9px] md:text-[10px] tracking-widest uppercase">Made by dharmayang</p>
                   </div>
                 </div>
 
-                <div className="mt-auto mb-24 flex flex-col items-center w-full">
-                  <div className="bg-emerald-950/60 p-4 rounded-xl border border-emerald-500/30 text-center backdrop-blur-md w-full max-w-[286px] shadow-lg">
-                    <p className="text-emerald-200/80 text-[10px] leading-relaxed font-medium">
-                      This badge is the property of <strong className="text-emerald-400 font-bold">DHARTECH</strong>. 
+                <div className="mt-auto mb-20 flex flex-col items-center w-full">
+                  <div className="bg-white/5 p-2.5 rounded-lg border border-white/10 text-center backdrop-blur-md w-full max-w-[180px] shadow-lg">
+                    <p className="text-gray-300 text-[9px] md:text-[10px] leading-relaxed font-medium">
+                      This badge is the property of <strong className="text-white font-bold">DHARTECH</strong>. 
                       If found, please return to the nearest security desk.
                     </p>
                   </div>
                   
-                  <p className="mt-4 text-emerald-600/60 font-mono text-[9px] tracking-[0.3em] uppercase font-bold">ID: DHAR-2026-001</p>
+                  <p className="mt-2 text-gray-500 font-mono text-[9px] md:text-[10px] tracking-[0.3em] uppercase font-bold">ID: DHAR-2026-001</p>
                 </div>
               </div>
             </motion.div>

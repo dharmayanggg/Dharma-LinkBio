@@ -74,16 +74,16 @@ const PortfolioGallery: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#010b0a] text-slate-300 font-sans pb-20">
+    <div className="min-h-screen bg-white text-slate-800 font-sans pb-20">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-[#010b0a]/80 backdrop-blur-xl border-b border-emerald-900/20">
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200">
         <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 text-slate-400 hover:text-emerald-500 transition-colors group">
+          <Link to="/" className="flex items-center gap-2 text-slate-400 hover:text-black transition-colors group">
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
           </Link>
           <div className="flex flex-col items-center">
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-500 leading-none mb-1">Showcase</span>
-            <h1 className="text-sm font-black text-white uppercase tracking-widest">Portfolio Gallery</h1>
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500 leading-none mb-1">Showcase</span>
+            <h1 className="text-sm font-black text-black uppercase tracking-widest">Portfolio Gallery</h1>
           </div>
           <div className="w-10" /> {/* Spacer */}
         </div>
@@ -96,15 +96,15 @@ const PortfolioGallery: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           className="space-y-4"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/5 border border-black/20 text-black mb-4">
             <Briefcase className="w-3 h-3" />
             <span className="text-[10px] font-black uppercase tracking-widest">Featured Projects</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none">
+          <h2 className="text-4xl md:text-6xl font-black text-black uppercase tracking-tighter leading-none">
             Crafting Digital <br />
-            <span className="text-emerald-500">Experiences.</span>
+            <span className="text-gray-400">Experiences.</span>
           </h2>
-          <p className="text-slate-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+          <p className="text-slate-500 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
             Telah menyelesaikan puluhan web project berbasis customer service. Berikut adalah beberapa diantaranya:
           </p>
         </motion.div>
@@ -119,7 +119,7 @@ const PortfolioGallery: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            className="group relative bg-[#0a0a0a] border border-white/10 rounded-[2rem] overflow-hidden transition-all shadow-none"
+            className="group relative bg-white border border-gray-200 rounded-[2rem] overflow-hidden transition-all shadow-sm hover:shadow-md"
           >
             {/* Project Image */}
             <div 
@@ -132,7 +132,7 @@ const PortfolioGallery: React.FC = () => {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-transparent opacity-40" />
               
               {/* Category Tag */}
               <div className="absolute top-4 left-4">
@@ -145,10 +145,10 @@ const PortfolioGallery: React.FC = () => {
             {/* Content */}
             <div className="p-8 space-y-6">
               <div className="space-y-3">
-                <h3 className="text-2xl font-black text-white uppercase tracking-tight group-hover:text-emerald-500 transition-colors">
+                <h3 className="text-2xl font-black text-black uppercase tracking-tight group-hover:text-gray-600 transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-sm text-slate-400 leading-relaxed line-clamp-3">
+                <p className="text-sm text-slate-500 leading-relaxed line-clamp-3">
                   {project.description}
                 </p>
               </div>
@@ -158,7 +158,7 @@ const PortfolioGallery: React.FC = () => {
                 <Link 
                   to="/portfolio/preview" 
                   state={{ activeProjectIndex: index }}
-                  className="inline-flex items-center justify-center px-8 py-3 rounded-2xl bg-emerald-500 text-[#010b0a] font-black uppercase tracking-widest text-[11px] hover:bg-emerald-400 transition-colors"
+                  className="inline-flex items-center justify-center px-8 py-3 rounded-2xl bg-black text-white font-black uppercase tracking-widest text-[11px] hover:bg-gray-800 transition-colors"
                 >
                   Read More
                 </Link>
@@ -174,25 +174,25 @@ const PortfolioGallery: React.FC = () => {
           href="https://wa.me/6282342344558" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="group relative w-full flex flex-col md:flex-row items-center justify-between p-8 md:p-12 rounded-[2.5rem] bg-gradient-to-br from-emerald-500 to-teal-600 overflow-hidden transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_20px_50px_rgba(16,185,129,0.3)]"
+          className="group relative w-full flex flex-col md:flex-row items-center justify-between p-8 md:p-12 rounded-[2.5rem] bg-black overflow-hidden transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_20px_50px_rgba(0,0,0,0.1)]"
         >
           {/* Background Icon with Gradient */}
-          <div className="absolute -right-10 -bottom-10 opacity-20 group-hover:scale-110 transition-transform duration-700">
-            <div className="p-20 rounded-full bg-white/20 blur-3xl absolute inset-0"></div>
+          <div className="absolute -right-10 -bottom-10 opacity-10 group-hover:scale-110 transition-transform duration-700">
+            <div className="p-20 rounded-full bg-white/5 blur-3xl absolute inset-0"></div>
             <MessageCircle className="w-64 h-64 text-white" />
           </div>
 
           <div className="relative z-10 text-center md:text-left space-y-2 mb-8 md:mb-0">
-            <h3 className="text-3xl md:text-5xl font-black text-[#010b0a] uppercase tracking-tighter leading-tight">
+            <h3 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter leading-tight">
               Konsultasi <br className="hidden md:block" /> Website
             </h3>
-            <p className="text-[#010b0a]/70 font-bold text-sm md:text-lg">
+            <p className="text-white/70 font-bold text-sm md:text-lg">
               Diskusikan keinginan kamu dengan Dharma
             </p>
           </div>
 
-          <div className="relative z-10 flex items-center gap-4 px-8 py-4 rounded-2xl bg-[#010b0a] text-emerald-500 font-black uppercase tracking-widest text-sm group-hover:bg-black transition-colors">
-            Mulai Sekarang <Zap className="w-4 h-4 fill-emerald-500" />
+          <div className="relative z-10 flex items-center gap-4 px-8 py-4 rounded-2xl bg-white text-black font-black uppercase tracking-widest text-sm group-hover:bg-gray-100 transition-colors">
+            Mulai Sekarang <Zap className="w-4 h-4 fill-black" />
           </div>
         </a>
       </section>
