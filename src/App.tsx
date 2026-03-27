@@ -146,18 +146,6 @@ function Home() {
         <div className={`absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full blur-[120px] ${isDarkMode ? 'bg-teal-900/20' : 'bg-gray-100/50'}`}></div>
       </div>
 
-      {/* Marquee Animation */}
-      <div className={`w-full overflow-hidden py-2 border-y ${isDarkMode ? 'bg-[#021b1a]/50 border-emerald-900/30' : 'bg-white border-gray-100'} relative z-20`}>
-        <motion.div 
-          animate={{ x: [0, -1000] }}
-          transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-          className={`flex whitespace-nowrap gap-10 text-[10px] font-bold uppercase tracking-[0.2em] ${isDarkMode ? 'text-emerald-500/50' : 'text-black/30'}`}
-        >
-          <span>• UI/UX DESIGN • WEB DEVELOPMENT • APP DEVELOPMENT • SOCIAL MEDIA MANAGEMENT • GRAPHIC DESIGN • DIGITAL PRODUCTS • AI AUTOMATION • </span>
-          <span>• UI/UX DESIGN • WEB DEVELOPMENT • APP DEVELOPMENT • SOCIAL MEDIA MANAGEMENT • GRAPHIC DESIGN • DIGITAL PRODUCTS • AI AUTOMATION • </span>
-        </motion.div>
-      </div>
-
       {/* SaaS Style Header */}
       <nav className={`sticky top-0 z-50 w-full border-b backdrop-blur-md transition-all ${isDarkMode ? 'bg-[#010b0a]/80 border-emerald-900/20' : 'bg-white/80 border-gray-100'}`}>
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -186,7 +174,7 @@ function Home() {
       <InteractiveCard 
         name="Dharma Budiyasa" 
         role="Digital Enthusiast" 
-        imageUrl="https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Pribadi/1772540751342.png" 
+        imageUrl="https://api.dicebear.com/9.x/notionists/svg?seed=Dharma" 
       />
 
       <main className="relative z-10 max-w-5xl mx-auto px-6 pt-6 pb-12 flex flex-col items-center gap-10">
@@ -226,9 +214,9 @@ function Home() {
           {/* Project Stats Section */}
           <div className="grid grid-cols-3 gap-4 md:gap-8 w-full">
             {[
-              { label: 'Project', value: 100, suffix: '+' },
-              { label: 'Websites', value: 50, suffix: '+' },
-              { label: 'Apps', value: 20, suffix: '+' },
+              { label: 'Projects', value: 121, suffix: '+' },
+              { label: 'Websites', value: 56, suffix: '+' },
+              { label: 'Apps', value: 18, suffix: '+' },
             ].map((stat, i) => (
               <div key={i} className={`p-3 rounded-xl border text-center transition-all duration-300 group hover:-translate-y-1 ${
                 isDarkMode 
@@ -252,15 +240,11 @@ function Home() {
           </div>
 
           <div className="w-full flex flex-col gap-3">
-            <a 
+              <a 
               href="https://drive.google.com/file/d/1wQWC5AW_ZGwKkTomy6CgOi1ZWEhf2x9t/view?usp=drivesdk"
               target="_blank"
               rel="noopener noreferrer"
-              className={`p-4 md:p-5 rounded-xl font-bold text-sm md:text-base flex items-center justify-start px-6 md:px-8 gap-4 transition-all duration-300 border backdrop-blur-md group hover:-translate-y-1 active:scale-[0.98] relative overflow-hidden ${
-                isDarkMode 
-                  ? 'bg-white/5 border-white/10 text-slate-300 hover:border-emerald-500/50 hover:bg-white/10' 
-                  : 'bg-white border-gray-200 text-black hover:bg-gray-50 shadow-sm'
-              }`}
+              className={`p-6 md:p-8 rounded-2xl font-bold text-base md:text-lg flex items-center justify-start px-8 md:px-10 gap-6 transition-all duration-300 border backdrop-blur-md group hover:-translate-y-1 active:scale-[0.98] relative overflow-hidden bg-black text-white hover:bg-gray-900 shadow-xl`}
             >
               {/* Border Glow Animation */}
               <motion.div 
@@ -273,37 +257,12 @@ function Home() {
                   ]
                 }}
                 transition={{ duration: 2, repeat: Infinity }}
-                className="absolute inset-0 rounded-xl pointer-events-none border border-black/10"
+                className="absolute inset-0 rounded-2xl pointer-events-none border border-white/10"
               />
-              <FileText className="w-6 h-6 transition-transform group-hover:scale-110 relative z-10" />
+              <FileText className="w-8 h-8 transition-transform group-hover:scale-110 relative z-10" />
               <span className="relative z-10">Design Portfolio (Pdf)</span>
-              <ExternalLink className="w-5 h-5 opacity-50 ml-auto relative z-10" />
+              <ExternalLink className="w-6 h-6 opacity-50 ml-auto relative z-10" />
             </a>
-            <Link 
-              to="/portfolio"
-              className={`p-4 md:p-5 rounded-xl font-bold text-sm md:text-base flex items-center justify-start px-6 md:px-8 gap-4 transition-all duration-300 border backdrop-blur-md group hover:-translate-y-1 active:scale-[0.98] relative overflow-hidden ${
-                isDarkMode 
-                  ? 'bg-emerald-500 border-emerald-500 text-[#010b0a] hover:bg-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)]' 
-                  : 'bg-black border-black text-white hover:bg-gray-800 shadow-sm'
-              }`}
-            >
-              {/* Border Glow Animation */}
-              <motion.div 
-                animate={{ 
-                  opacity: [0.5, 1, 0.5],
-                  boxShadow: [
-                    "0 0 0px rgba(255,255,255,0)",
-                    "0 0 20px rgba(255,255,255,0.3)",
-                    "0 0 0px rgba(255,255,255,0)"
-                  ]
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="absolute inset-0 rounded-xl pointer-events-none border border-white/20"
-              />
-              <Briefcase className="w-6 h-6 transition-transform group-hover:scale-110 relative z-10" />
-              <span className="relative z-10">Web Portofolio</span>
-              <ArrowRight className="w-5 h-5 ml-auto relative z-10" />
-            </Link>
           </div>
         </div>
 
@@ -408,61 +367,6 @@ function Home() {
           </div>
         </section>
 
-        {/* SECTION 6: Web Projects Showcase */}
-        <section className="w-full space-y-6">
-          <div className="flex items-center justify-between">
-            <h3 className={`text-xs font-bold tracking-widest uppercase flex items-center gap-3 ${isDarkMode ? 'text-slate-500' : 'text-gray-400'}`}>
-              <span className={`w-6 h-[2px] ${isDarkMode ? 'bg-slate-800' : 'bg-gray-100'}`}></span>
-              Web Projects
-              <span className={`w-6 h-[2px] ${isDarkMode ? 'bg-slate-800' : 'bg-gray-100'}`}></span>
-            </h3>
-            <Link to="/portfolio" className="text-[10px] font-black uppercase tracking-widest text-black hover:text-gray-600 flex items-center gap-1 transition-colors">
-              View All <ChevronRight className="w-3 h-3" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[
-              { 
-                title: 'Retail Memberships', 
-                desc: 'Platform kartu member digital & AI scan produk.',
-                value: '8.5M',
-                icon: <ShoppingBag className="w-5 h-5" />,
-                color: 'from-gray-50 to-gray-100'
-              },
-              { 
-                title: 'UKM Penalaran Hub', 
-                desc: 'Platform komunitas riset & forum diskusi AI.',
-                value: '5.0M',
-                icon: <Globe className="w-5 h-5" />,
-                color: 'from-gray-100 to-gray-200'
-              },
-              { 
-                title: 'Pegadaian Swasta', 
-                desc: 'Landing page & tools taksiran barang otomatis.',
-                value: '3.5M',
-                icon: <Calculator className="w-5 h-5" />,
-                color: 'from-gray-50 to-gray-100'
-              }
-            ].map((p, i) => (
-              <Link key={i} to="/portfolio" className={`group p-5 rounded-2xl border border-gray-200 bg-gradient-to-br ${p.color} hover:border-black/30 transition-all relative overflow-hidden`}>
-                <div className="relative z-10 flex justify-between items-start">
-                  <div className="space-y-2">
-                    <div className="p-2 w-fit rounded-lg bg-black text-white mb-2">
-                      {p.icon}
-                    </div>
-                    <h4 className="font-black text-black uppercase tracking-tight text-sm">{p.title}</h4>
-                    <p className="text-[11px] md:text-xs text-gray-500 leading-relaxed max-w-[180px]">{p.desc}</p>
-                  </div>
-                </div>
-                <div className="absolute -bottom-2 -right-2 opacity-5 group-hover:scale-110 transition-transform">
-                   {React.cloneElement(p.icon as React.ReactElement, { className: "w-20 h-20 text-black" })}
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-
         {/* New Buttons Section: Service, Product Digital */}
         <div className="grid grid-cols-2 gap-4 md:gap-8 w-full">
           <Link 
@@ -488,69 +392,6 @@ function Home() {
             <Package className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover:scale-110" />
             <span>Product Digital</span>
           </Link>
-        </div>
-
-        {/* SECTION 6: Logo Marquee */}
-        <div className="w-full overflow-hidden py-10 space-y-8">
-          <div className="flex flex-col gap-6">
-            {/* Row 1: Right to Left */}
-            <div className="flex overflow-hidden group">
-              <motion.div 
-                animate={{ x: [0, -1000] }}
-                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                className="flex items-center gap-12 whitespace-nowrap px-6 shrink-0"
-              >
-                {[
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/claude.png",
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/cursor.png",
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/firebase-logo.png",
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/gemini-logo.png",
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/github-logo.png"
-                ].map((url, i) => (
-                  <img key={i} src={url} alt="tech-logo" className="h-12 md:h-16 w-auto object-contain transition-all" referrerPolicy="no-referrer" />
-                ))}
-                {/* Duplicate for seamless loop */}
-                {[
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/claude.png",
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/cursor.png",
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/firebase-logo.png",
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/gemini-logo.png",
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/github-logo.png"
-                ].map((url, i) => (
-                  <img key={`dup-${i}`} src={url} alt="tech-logo" className="h-12 md:h-16 w-auto object-contain transition-all" referrerPolicy="no-referrer" />
-                ))}
-              </motion.div>
-            </div>
-
-            {/* Row 2: Left to Right */}
-            <div className="flex overflow-hidden group">
-              <motion.div 
-                animate={{ x: [-1000, 0] }}
-                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                className="flex items-center gap-12 whitespace-nowrap px-6 shrink-0"
-              >
-                {[
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/google-aistudio_1.png",
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/google-cloud-logo.png",
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/supabase-logo.png",
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/v0-dev.png",
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/vercel-logo.png"
-                ].map((url, i) => (
-                  <img key={i} src={url} alt="tech-logo-2" className="h-12 md:h-16 w-auto object-contain transition-all" referrerPolicy="no-referrer" />
-                ))}
-                {/* Duplicate for seamless loop */}
-                {[
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/google-aistudio_1.png",
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/google-cloud-logo.png",
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/supabase-logo.png",
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/v0-dev.png",
-                  "https://storage.googleapis.com/ai-studio-bucket-353083286262-us-west1/Logo%20developer/vercel-logo.png"
-                ].map((url, i) => (
-                  <img key={`dup2-${i}`} src={url} alt="tech-logo-2" className="h-12 md:h-16 w-auto object-contain transition-all" referrerPolicy="no-referrer" />
-                ))}
-              </motion.div>
-            </div>
-          </div>
         </div>
 
         {/* SECTION 6: Social Links */}
